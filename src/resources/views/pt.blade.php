@@ -1,6 +1,8 @@
 @extends('layouts.common')
-@include('layouts.head')
- 
+@section('pageCss')
+<link href="/css/top.css" rel="stylesheet">
+@endsection
+@include('layouts.head') 
 @include('layouts.header')
 @section('content')
 <main>
