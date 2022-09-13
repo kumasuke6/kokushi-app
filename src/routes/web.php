@@ -13,17 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('/welcome');
 });
 
-Route::get('/top', function () {
+Route::get('/', function () {
     return view('top');
 });
 
 Route::prefix('questions')->group(function(){
-    Route::get('/pt',function(){
-        return view('pt');
+    Route::get('/select_test_type',function(){
+        return view('select_test_type');
+    });
+
+    Route::get('/test',function(){
+        return view('test');
     });
 });
 
