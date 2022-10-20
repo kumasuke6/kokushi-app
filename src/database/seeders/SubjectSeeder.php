@@ -14,13 +14,31 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('subjects')->insert(
+        $params = [
             [
                 'type' => 0,
                 'year' => 2021,
                 'harf_div' => 1,
             ],
-        );
+            [
+                'type' => 0,
+                'year' => 2021,
+                'harf_div' => 2,
+            ],
+            [
+                'type' => 0,
+                'year' => 2022,
+                'harf_div' => 1,
+            ],
+            [
+                'type' => 0,
+                'year' => 2022,
+                'harf_div' => 2,
+            ],
+        ];
 
+        foreach ($params as $param){
+            DB::table('subjects')->insert($param);
+        }
     }
 }
