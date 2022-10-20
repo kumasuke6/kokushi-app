@@ -14,7 +14,7 @@
       <div class="col-lg-8 pt-3">
         <h2>理学療法士国家試験</h2>
         <p>5年間の理学療法士国家試験を出題</p>
-        <p><a class="btn btn-primary" href="{{url('/questions/pt')}}" role="button">詳細を見る</a></p>
+        <p><a class="btn btn-primary" href="{{url('/questions/select_test_type')}}" role="button">詳細を見る</a></p>
       </div>
       <div class="col-lg-4 pt-3">
         <h2>見出し</h2>

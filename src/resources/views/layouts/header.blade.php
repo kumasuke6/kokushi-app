@@ -14,7 +14,7 @@
             <li class="nav-item">
             @if (Route::has('login'))
               @auth
-              <form action="{{ route('logout') }}" method="post">
+              <form action="{{ route('logout') }}" method="post" class="nav-link">
                 @csrf
                 <input type="submit" value="ログアウト">
               </form>
