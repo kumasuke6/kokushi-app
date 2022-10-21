@@ -18,21 +18,25 @@ class SubjectSeeder extends Seeder
             [
                 'type' => 0,
                 'year' => 2021,
+                'number' => 56,
                 'harf_div' => 1,
             ],
             [
                 'type' => 0,
                 'year' => 2021,
+                'number' => 56,
                 'harf_div' => 2,
             ],
             [
                 'type' => 0,
                 'year' => 2022,
+                'number' => 57,
                 'harf_div' => 1,
             ],
             [
                 'type' => 0,
                 'year' => 2022,
+                'number' => 57,
                 'harf_div' => 2,
             ],
         ];
