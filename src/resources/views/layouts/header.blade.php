@@ -7,22 +7,22 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="Navbar">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ul class="navbar-nav align-items-md-center">
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="#">ホーム</a>
             </li>
             <li class="nav-item">
             @if (Route::has('login'))
               @auth
-              <form action="{{ route('logout') }}" method="post" class="nav-link">
+              <form action="{{ route('logout') }}" method="post" class="mb-0">
                 @csrf
-                <input type="submit" value="ログアウト">
+                <input type="submit" value="ログアウト" class="nav-link bg-dark border-0">
               </form>
-              @else
+            @else
                 <div class="d-flex">
                   <a href="{{ route('login') }}" class="nav-link">ログイン</a>
                   @if (Route::has('register'))
-                      <a href="{{ route('register') }}" class="nav-link">新規登録</a>
+                    <a href="{{ route('register') }}" class="nav-link">新規登録</a>
                   @endif
                 </div>
               @endauth
