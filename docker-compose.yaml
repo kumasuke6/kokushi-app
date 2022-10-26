@@ -27,5 +27,13 @@ services:
       - ./.env
     volumes:
       - mysql-volume:/var/lib/mysql 
+  db-test:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    ports:
+      - 3000:3306
+    env_file:
+      - ./.env.test
 volumes:
   mysql-volume:

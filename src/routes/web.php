@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SelectExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('questions')->group(function(){
-    Route::get('/select_test_type',function(){
-        return view('select_test_type');
-    });
+    Route::get('/select_exam', [SelectExamController::class, 'subjectShow']);
 
     Route::get('/test',function(){
         return view('test');

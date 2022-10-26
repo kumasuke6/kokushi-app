@@ -29,26 +29,12 @@
           </div>
         </div>
         <div class="list-group">
+          @foreach($subjects as $subject)
           <label class="list-group-item">
             <input class="form-check-input me-1" type="checkbox" value="">
-            第55回 令和2年度(2020年)
+            第{{ $subject->number }}回　（{{ $subject->year }}年）
           </label>
-          <label class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="">
-            第54回 平成31年度(2019年)
-          </label>
-          <label class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="">
-            第53回 平成30年度(2018年)
-          </label>
-          <label class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="">
-            第52回 平成29年度(2017年)
-          </label>
-          <label class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="">
-            第51回 平成28年度(2016年)
-          </label>
+          @endforeach
         </div>
         <p class="pt-3"><a class="btn btn-primary" href="#" role="button">スタート</a></p>
       </div>

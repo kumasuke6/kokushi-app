@@ -14,7 +14,10 @@
       <div class="col-lg-8 pt-3">
         <h2>理学療法士国家試験</h2>
         <p>5年間の理学療法士国家試験を出題</p>
-        <p><a class="btn btn-primary" href="{{url('/questions/select_test_type')}}" role="button">詳細を見る</a></p>
+        <form action="{{ url('questions/select_exam') }}" method="get">
+          <input type="hidden" name="type" value="0">
+          <input type="submit" value="詳細を見る" class="btn btn-primary">
+        </form>
       </div>
       <div class="col-lg-4 pt-3">
         <h2>見出し</h2>
