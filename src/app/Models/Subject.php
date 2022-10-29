@@ -10,6 +10,7 @@ class Subject extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    
     public function get_subjects(string $type) {
         $subjects = DB::table('subjects')
             ->select('*')

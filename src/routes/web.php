@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SelectExamController;
+use App\Http\Controllers\TopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,8 @@ Route::get('/', function () {
 Route::prefix('questions')->group(function(){
     Route::get('/select_exam', [SelectExamController::class, 'subjectShow']);
 
-    Route::get('/test',function(){
-        return view('test');
+    Route::get('/exam',function(){
+        return view('exam');
     });
 });
 

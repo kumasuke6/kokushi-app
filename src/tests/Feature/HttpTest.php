@@ -13,6 +13,13 @@ class HttpTest extends TestCase
      *
      * @return void
      */
+    public function test_top()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
     public function test_questions_select_exam()
     {
         $response = $this->get('/questions/select_exam');

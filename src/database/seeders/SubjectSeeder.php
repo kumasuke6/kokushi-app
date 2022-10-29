@@ -17,24 +17,28 @@ class SubjectSeeder extends Seeder
         $params = [
             [
                 'type' => 0,
+                'name' => '理学療法士国家試験',
                 'year' => 2021,
                 'number' => 56,
                 'harf_div' => 1,
             ],
             [
                 'type' => 0,
+                'name' => '理学療法士国家試験',
                 'year' => 2021,
                 'number' => 56,
                 'harf_div' => 2,
             ],
             [
                 'type' => 0,
+                'name' => '理学療法士国家試験',
                 'year' => 2022,
                 'number' => 57,
                 'harf_div' => 1,
             ],
             [
                 'type' => 0,
+                'name' => '理学療法士国家試験',
                 'year' => 2022,
                 'number' => 57,
                 'harf_div' => 2,
