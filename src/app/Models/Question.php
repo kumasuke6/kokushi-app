@@ -12,7 +12,7 @@ class Question extends Model
     use HasFactory;
     public function getQuestions(){
         $questions = DB::table('questions')
-            ->find(2);
+            ->paginate(1);
         return $questions;
     }
 }

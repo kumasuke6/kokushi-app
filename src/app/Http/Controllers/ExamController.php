@@ -13,11 +13,11 @@ class ExamController extends Controller
 
         // choiceをランダムにする処理
         $choices = array(
-            'choice1' => $result->choice1,
-            'choice2' => $result->choice2,
-            'choice3' => $result->choice3,
-            'choice4' => $result->choice4,
-            'choice5' => $result->choice5,
+            'choice1' => $result[0]->choice1,
+            'choice2' => $result[0]->choice2,
+            'choice3' => $result[0]->choice3,
+            'choice4' => $result[0]->choice4,
+            'choice5' => $result[0]->choice5,
         );
         $aryKey = array_keys($choices);
         shuffle($aryKey);
@@ -27,12 +27,12 @@ class ExamController extends Controller
         }
 
         // answerを配列にする処理
-        $aryAnswer = str_split($result->answer);
+        $aryAnswer = str_split($result[0]->answer);
         foreach($aryAnswer as $key => $value){
             $aryAnswer[$key] = "choice" . $value;
         }
 
         // TODO: questionの内容がほかの項目とかぶっているため再検討必要。
-        return view('exam', ['question' => $result, 'randomChoices' => $randomChoices, 'aryAnswers' => $aryAnswer]);
+        return view('exam', ['questions' => $result, 'randomChoices' => $randomChoices, 'aryAnswers' => $aryAnswer]);
     }
 }

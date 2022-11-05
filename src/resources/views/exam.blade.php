@@ -10,8 +10,8 @@
             <div class="row">
                 <div class="col-lg-8 pt-3">
                     <h2>理学療法士国家試験</h2>
-                    <h3>問題2</h3>
-                    <p>{{ $question->caption }}</p>
+                    <h3>問題</h3>
+                    <p>{{ $questions[0]->caption }}</p>
                     <h4>選択肢</h4>
                     <form name="formCheckChoice">
                         @foreach ($randomChoices as $key => $value)
@@ -21,19 +21,20 @@
                                 <label for="{{ $key }}" class="form-check-label">{{ $value }}</label>
                             </div>
                         @endforeach
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex">
                             <p id="answer-btn" class="pt-3">
                                 <a class="btn btn-primary" onclick="checkChoice()" role="button">正解を確認</a>
                             </p>
-                            <p id="next-btn" class="pt-3 ms-auto d-none">
-                                <a class="btn btn-primary" role="button">次の問題へ</a>
+                            <p id="next-btn" class="pt-3 d-none">
+                                <a class="btn btn-secondary" href="{{ $questions->nextPageUrl() }}" role="button">次の問題へ</a>
                             </p>
                         </div>
                     </form>
                     <div id="explan" class="d-none">
                         <h4 id="answer"></h4>
-                        <p>{{ $question->explan }}</p>
+                        <p>{{ $questions[0]->explan }}</p>
                     </div>
+                    {{ $questions->links() }}
                 </div>
                 <div class="col-lg-4 pt-3">
                     <h2>Navか広告</h2>
