@@ -15,7 +15,7 @@ controller:
 
 # make model model=[モデル名]
 model:
-	$(EXEC_APP) php aritisan make:model ${model}
+	$(EXEC_APP) php artisan make:model ${model}
 
 migrate:
 	$(EXEC_APP) php artisan migrate:fresh --seed

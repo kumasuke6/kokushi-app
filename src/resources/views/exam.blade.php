@@ -1,57 +1,91 @@
 @extends('layouts.common')
 @section('pageCss')
-<link href="/css/top.css" rel="stylesheet">
+    <link href="/css/top.css" rel="stylesheet">
 @endsection
-@include('layouts.head') 
+@include('layouts.head')
 @include('layouts.header')
 @section('content')
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 pt-3">
-        <h2>理学療法士国家試験</h2>
-        <h3>問題2</h3>
-        <p>74 歳の女性。左片麻痺。Brunnstrom 法ステージ上肢Ⅱ、下肢Ⅲ。患側の筋緊張
-は低く、随意的な筋収縮もわずかにみられる程度である。平行棒内立位は中等度介
-助が必要で、左下肢は膝伸展位を保持することが困難で、体重をかけると膝折れが
-生じる。</p>
-        <h4>選択肢</h4>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox1" value="option1">
-          <label for="checkbox1" class="form-check-label"> 1.左下肢の筋力が低下している。</label>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 pt-3">
+                    <h2>理学療法士国家試験</h2>
+                    <h3>問題2</h3>
+                    <p>{{ $question->caption }}</p>
+                    <h4>選択肢</h4>
+                    <form name="formCheckChoice">
+                        @foreach ($randomChoices as $key => $value)
+                            <div class="form-check rounded" id="">
+                                <input type="checkbox" name="choice" class="form-check-input" id="{{ $key }}"
+                                    value="{{ $key }}">
+                                <label for="{{ $key }}" class="form-check-label">{{ $value }}</label>
+                            </div>
+                        @endforeach
+                        <div class="d-flex justify-content-between">
+                            <p id="answer-btn" class="pt-3">
+                                <a class="btn btn-primary" onclick="checkChoice()" role="button">正解を確認</a>
+                            </p>
+                            <p id="next-btn" class="pt-3 ms-auto d-none">
+                                <a class="btn btn-primary" role="button">次の問題へ</a>
+                            </p>
+                        </div>
+                    </form>
+                    <div id="explan" class="d-none">
+                        <h4 id="answer"></h4>
+                        <p>{{ $question->explan }}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 pt-3">
+                    <h2>Navか広告</h2>
+                </div>
+            </div>
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox2" value="option2">
-          <label for="checkbox2" class="form-check-label">2.左下肢の筋力増強練習を行う。</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox3" value="option3">
-          <label for="checkbox3" class="form-check-label">3.左下肢の筋緊張が低下している。</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox4" value="option3">
-          <label for="checkbox4" class="form-check-label">4.左下肢に長下肢装具を使用し立位練習を行う。</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="checkbox5" value="option3">
-          <label for="checkbox5" class="form-check-label">5.左下肢の筋緊張低下により体重支持力が低下している。</label>
-        </div>
-        <p class="pt-3">
-          <a id="answer" class="btn btn-primary" href="#" role="button">正解を確認</a>
-        </p>
-      </div>
-      <div class="col-lg-4 pt-3">
-        <h2>Navか広告</h2>
-      </div>
-    </div>
-  </div>
-</main>
+    </main>
 @endsection
 @section('pageJs')
-<script>
-  document.getElementById("answer").onclick = function() {
-    alert("正解");
-  };
-</script>
+    <script>
+        let answers = {{ Js::from($aryAnswers) }};
+        console.log(answers);
+
+        function checkChoice() {
+            // 表示の変更
+            document.getElementById('answer-btn').classList.add('d-none')
+            document.getElementById('next-btn').classList.remove('d-none')
+            document.getElementById("explan").classList.remove("d-none")
+
+            var answers = {{ Js::from($aryAnswers) }};
+            var aryChoices = []
+            var choices = document.getElementsByName('choice')
+
+            for (let i = 0; i < choices.length; i++) {
+                if (choices[i].checked) {
+                    aryChoices.push(choices[i].value)
+                }
+            }
+
+            if (array_equal(answers, aryChoices)) {
+                document.getElementById('answer').innerText = '正解';
+                for (let i = 0; i < answers.length; i++) {
+                    document.getElementById(answers[i]).parentNode.classList.add('correct-answer')
+                }
+            } else {
+                document.getElementById('answer').innerText = '不正解';
+                for (let i = 0; i < answers.length; i++) {
+                    document.getElementById(answers[i]).parentNode.classList.add('correct-answer')
+                }
+            }
+        }
+
+
+        function array_equal(a, b) {
+            if (!Array.isArray(a)) return false;
+            if (!Array.isArray(b)) return false;
+            if (a.length != b.length) return false;
+            for (var i = 0, n = a.length; i < n; ++i) {
+                if (!b.includes(a[i])) return false;
+            }
+            return true;
+        }
+    </script>
 @endsection
 @include('layouts.footer')

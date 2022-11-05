@@ -11,10 +11,11 @@ class Subject extends Model
     use HasFactory;
     public $timestamps = false;
     
-    public function get_subjects(string $type) {
+    public function getSubjects(string $type) {
         $subjects = DB::table('subjects')
             ->select('*')
             ->where('type', $type)
+            ->groupBy('subjects.year')
             ->orderByDesc('subjects.year')
             ->get();
         return $subjects;

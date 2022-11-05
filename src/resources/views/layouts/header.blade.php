@@ -2,7 +2,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#">過去問勉強帳</a>
+        <a class="navbar-brand" href="{{ url('/') }}">セラピスト国試エキスパート</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
           <span class="navbar-toggler-icon"></span>
         </button>

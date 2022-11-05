@@ -14,3 +14,8 @@
     flex: 1 0 auto;
   }
 }
+
+/* 以下はexamにて使用 */
+.correct-answer {
+    background-color: #CCFFCC;
+}

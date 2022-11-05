@@ -2,14 +2,14 @@
 @section('pageCss')
 <link href="/css/top.css" rel="stylesheet">
 @endsection
-@include('layouts.head') 
+@include('layouts.head')
 @include('layouts.header')
 @section('content')
 <main>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 pt-3">
-        <h2>理学療法士国家試験</h2>
+        <h2>{{ $subjects[0]->name }}</h2>
         <div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
@@ -36,7 +36,7 @@
           </label>
           @endforeach
         </div>
-        <p class="pt-3"><a class="btn btn-primary" href="#" role="button">スタート</a></p>
+        <p class="pt-3"><a class="btn btn-primary" href="{{ url('questions/exam') }}" role="button">スタート</a></p>
       </div>
       <div class="col-lg-4 pt-3">
         <h2>Navか広告</h2>
