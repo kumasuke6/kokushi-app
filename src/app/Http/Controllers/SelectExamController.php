@@ -9,7 +9,7 @@ class SelectExamController extends Controller
 {
     public function showSubjects(Request $request){
         $subject = new Subject();
-        $subjects = $subject->getSubjects($request);
+        $subjects = $subject->getSubjects($request->type);
         return view('select_exam', ['subjects' => $subjects]);
     }
 }

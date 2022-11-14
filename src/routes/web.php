@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::prefix('questions')->group(function(){
     Route::get('/select_exam', [SelectExamController::class, 'showSubjects']);
     Route::get('/exam', [ExamController::class, 'showQuestions']);
+    Route::get('/end_exam', [ExamController::class, 'endExam']);
 });
 
 Route::get('/dashboard', function () {

@@ -10,33 +10,47 @@
     <div class="row">
       <div class="col-lg-8 pt-3">
         <h2>{{ $subjects[0]->name }}</h2>
-        <div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
-            <label class="form-check-label" for="inlineCheckbox1">午前</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
-            <label class="form-check-label" for="inlineCheckbox2">午後</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-            <label class="form-check-label" for="inlineCheckbox3">出題順をランダムにする</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-            <label class="form-check-label" for="inlineCheckbox4">選択肢をランダムに並べ替える</label>
-          </div>
-        </div>
-        <div class="list-group">
-          @foreach($subjects as $subject)
-          <label class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" value="">
-            第{{ $subject->number }}回　（{{ $subject->year }}年）
-          </label>
-          @endforeach
-        </div>
-        <p class="pt-3"><a class="btn btn-primary" href="{{ url('questions/exam') }}" role="button">スタート</a></p>
+        <form action="{{ url('questions/exam') }}" method="get">
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="harf-am" name="harfDivs[]" value="1" checked>
+                    <label class="form-check-label" for="harf-am">午前問題すべて</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="harf-pm" name="harfDivs[]" value="2" checked>
+                    <label class="form-check-label" for="harf-pm">午後問題すべて</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="random" name="random" value="rand">
+                    <label class="form-check-label" for="random">出題順をランダムにする</label>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="d-flex flex-column">
+                    @foreach($subjects as $subject)
+                        @if($subject->harf_div  === 1)
+                        <label class="my-1 me-1 px-1 border rounded">
+                            <input class="form-check-input me-1" type="checkbox" name="ids[]" value="{{ $subject->id }}">
+                            第{{ $subject->number }}回（{{ $subject->year }}年）午前
+                        </label>
+                        @endif
+                    @endforeach
+                </div>
+                <div class="d-flex flex-column">
+                    @foreach($subjects as $subject)
+                        @if($subject->harf_div  === 2)
+                        <label class="my-1 me-1 px-1 border rounded">
+                            <input class="form-check-input me-1" type="checkbox" name="ids[]" value="{{ $subject->id }}">
+                            第{{ $subject->number }}回（{{ $subject->year }}年）午後
+                        </label>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            <p class="pt-3">
+                <input class="btn btn-primary" type="submit" value="スタート">
+            </p>
+        </form>
       </div>
       <div class="col-lg-4 pt-3">
         <h2>Navか広告</h2>

@@ -9,32 +9,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 pt-3">
-                    <h2>理学療法士国家試験</h2>
+                    <div>
+                        <p>第{{ $questions[0]->number }}回{{ $questions[0]->name }}　問題{{ $questions[0]->question_number }}</p>
+                    </div>
                     <h3>問題</h3>
                     <p>{{ $questions[0]->caption }}</p>
                     <h4>選択肢</h4>
-                    <form name="formCheckChoice">
-                        @foreach ($randomChoices as $key => $value)
-                            <div class="form-check rounded" id="">
-                                <input type="checkbox" name="choice" class="form-check-input" id="{{ $key }}"
-                                    value="{{ $key }}">
-                                <label for="{{ $key }}" class="form-check-label">{{ $value }}</label>
-                            </div>
-                        @endforeach
-                        <div class="d-flex">
-                            <p id="answer-btn" class="pt-3">
-                                <a class="btn btn-primary" onclick="checkChoice()" role="button">正解を確認</a>
-                            </p>
-                            <p id="next-btn" class="pt-3 d-none">
-                                <a class="btn btn-secondary" href="{{ $questions->nextPageUrl() }}" role="button">次の問題へ</a>
-                            </p>
+                    @foreach ($randomChoices as $key => $value)
+                        <div class="form-check rounded" >
+                            <input type="checkbox" name="choice" class="form-check-input" id="{{ $key }}"
+                                value="{{ $key }}">
+                            <label for="{{ $key }}" class="form-check-label">{{ $value }}</label>
                         </div>
-                    </form>
+                    @endforeach
+                    <div class="d-flex">
+                        <p id="answer-btn" class="pt-3">
+                            <a class="btn btn-primary" onclick="checkChoice()" role="button">正解を確認</a>
+                        </p>
+                        <div id="next-btn" class="pt-3 d-none">
+                            @if( $questions->currentPage()  === $questions->lastPage() )
+                                <form id="end-exam" action="{{ url('questions/end_exam') }}" method="get">
+                                    <input form="end-exam" type="hidden" name="page_count" value="{{$questions->lastPage()}}">
+                                    <input form="end-exam" type="submit" value="終わり">
+                                </form>
+                            @else
+                                <a class="btn btn-secondary" href="{{ $questions->appends(request()->query())->nextPageUrl() }}" role="button">次の問題へ</a>
+                            @endif
+                        </div>
+                    </div>
                     <div id="explan" class="d-none">
                         <h4 id="answer"></h4>
                         <p>{{ $questions[0]->explan }}</p>
                     </div>
-                    {{ $questions->links() }}
                 </div>
                 <div class="col-lg-4 pt-3">
                     <h2>Navか広告</h2>

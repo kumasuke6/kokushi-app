@@ -7,9 +7,9 @@ use App\Models\Question;
 
 class ExamController extends Controller
 {
-    public function showQuestions(){
+    public function showQuestions(Request $request){
         $questionModel = new Question();
-        $result = $questionModel->getQuestions();
+        $result = $questionModel->getQuestions($request);
 
         // choiceをランダムにする処理
         $choices = array(
@@ -34,5 +34,9 @@ class ExamController extends Controller
 
         // TODO: questionの内容がほかの項目とかぶっているため再検討必要。
         return view('exam', ['questions' => $result, 'randomChoices' => $randomChoices, 'aryAnswers' => $aryAnswer]);
+    }
+
+    public function endExam(Request $request){
+        return view('end_exam', ['pageCount' => $request->page_count]);
     }
 }
