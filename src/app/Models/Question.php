@@ -11,10 +11,20 @@ class Question extends Model
 {
     use HasFactory;
     public function getQuestions($request){
-        $questions = DB::table('questions')
+        $query = DB::table('questions')
             ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
-            ->whereIn('subject_id',$request->ids)
-            ->paginate(1);
-        return $questions;
+            ->whereIn('subject_id',$request->ids);
+        if($request->random == '1'){
+            if (is_null($request->seed)){
+                $seed = rand(1,9);
+            } else {
+                $seed = $request->seed;
+            }
+
+            $query->inRandomOrder($seed)
+                ->groupBy('questions.id');
+        }
+        $questions = $query->paginate(1);
+        return [$questions, $seed];
     }
 }

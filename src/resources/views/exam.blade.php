@@ -30,10 +30,10 @@
                             @if( $questions->currentPage()  === $questions->lastPage() )
                                 <form id="end-exam" action="{{ url('questions/end_exam') }}" method="get">
                                     <input form="end-exam" type="hidden" name="page_count" value="{{$questions->lastPage()}}">
-                                    <input form="end-exam" type="submit" value="終わり">
+                                    <input class="btn btn-secondary" form="end-exam" type="submit" value="終わり">
                                 </form>
                             @else
-                                <a class="btn btn-secondary" href="{{ $questions->appends(request()->query())->nextPageUrl() }}" role="button">次の問題へ</a>
+                                <a class="btn btn-secondary" href="{{ $questions->appends(request()->query())->appends(['seed' => $seed])->nextPageUrl() }}" role="button">次の問題へ</a>
                             @endif
                         </div>
                     </div>

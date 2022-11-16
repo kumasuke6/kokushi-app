@@ -19,3 +19,7 @@ model:
 
 migrate:
 	$(EXEC_APP) php artisan migrate:fresh --seed
+
+# make artisan artisan=[コード]
+artisan:
+	$(EXEC_APP) php artisan ${artisan}
