@@ -8,7 +8,7 @@
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 pt-3">
+                <div id="exam-page" class="col-lg-8 pt-3">
                     <div>
                         <p>第{{ $questions[0]->number }}回{{ $questions[0]->name }}　問題{{ $questions[0]->question_number }}</p>
                     </div>
@@ -28,10 +28,7 @@
                         </p>
                         <div id="next-btn" class="pt-3 d-none">
                             @if( $questions->currentPage()  === $questions->lastPage() )
-                                <form id="end-exam" action="{{ url('questions/end_exam') }}" method="get">
-                                    <input form="end-exam" type="hidden" name="page_count" value="{{$questions->lastPage()}}">
-                                    <input class="btn btn-secondary" form="end-exam" type="submit" value="終わり">
-                                </form>
+                                <a class="btn btn-secondary" onclick="finishQuestion()" role="button">終わり</a>
                             @else
                                 <a class="btn btn-secondary" href="{{ $questions->appends(request()->query())->appends(['seed' => $seed])->nextPageUrl() }}" role="button">次の問題へ</a>
                             @endif
@@ -40,6 +37,13 @@
                     <div id="explan" class="d-none">
                         <h4 id="answer"></h4>
                         <p>{{ $questions[0]->explan }}</p>
+                    </div>
+                </div>
+                <div id="finish-page" class="col-lg-8 pt-3 d-none">
+                    <div class="d-flex flex-column">
+                        <p id="finish-comment">{{ $questions->currentpage() - 1 }}問終了しました。お疲れさまでした。</p>
+                        <a id="next-q-link" class="btn btn-primary" onclick="nxetQuestion()" role="button">次の問題へ</a>
+                        <a class="btn btn-outline-secondary" href="{{ url('/') }}">トップページへ</a>
                     </div>
                 </div>
                 <div class="col-lg-4 pt-3">
@@ -51,8 +55,33 @@
 @endsection
 @section('pageJs')
     <script>
-        let answers = {{ Js::from($aryAnswers) }};
-        console.log(answers);
+        const examNumber = {{ Js::from($examNumber) }};
+        const currentPage = {{ Js::from($questions->currentPage()) }};
+        const examPage = document.getElementById('exam-page');
+        const finishPage = document.getElementById('finish-page');
+
+        window.onload = function(){
+            let finishQNumber = currentPage % examNumber
+            if( finishQNumber == 1 && currentPage != 1 ){
+                examPage.classList.add('d-none')
+                finishPage.classList.remove('d-none')
+            }
+        }
+
+        function nxetQuestion() {
+            finishPage.classList.add('d-none')
+            examPage.classList.remove('d-none')
+        }
+
+        const nextQLink = document.getElementById('next-q-link');
+        const finishComment = document.getElementById('finish-comment');
+
+        function finishQuestion() {
+            examPage.classList.add('d-none')
+            nextQLink.classList.add('d-none')
+            finishPage.classList.remove('d-none')
+            finishComment.innerText = currentPage + "問終了しました。お疲れさまでした";
+        }
 
         function checkChoice() {
             // 表示の変更
@@ -82,7 +111,6 @@
                 }
             }
         }
-
 
         function array_equal(a, b) {
             if (!Array.isArray(a)) return false;

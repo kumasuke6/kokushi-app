@@ -33,10 +33,6 @@ class ExamController extends Controller
         }
 
         // TODO: questionの内容がほかの項目とかぶっているため再検討必要。
-        return view('exam', ['questions' => $questions, 'randomChoices' => $randomChoices, 'aryAnswers' => $aryAnswer, 'seed' => $seed]);
-    }
-
-    public function endExam(Request $request){
-        return view('end_exam', ['pageCount' => $request->page_count]);
+        return view('exam', ['questions' => $questions, 'randomChoices' => $randomChoices, 'aryAnswers' => $aryAnswer, 'seed' => $seed, 'examNumber' => $request->examNumber]);
     }
 }

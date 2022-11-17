@@ -24,6 +24,10 @@
                                 <input class="form-check-input" type="checkbox" id="random" name="random" value="1">
                                 <label class="form-check-label" for="random">出題順をランダムにする</label>
                             </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="q-number" name="examNumber" value="2" checked>
+                                <label class="form-check-label" for="examNumber">2問ずつ出題</label>
+                            </div>
                         </div>
                         <div class="d-flex">
                             <div class="d-flex flex-column">
