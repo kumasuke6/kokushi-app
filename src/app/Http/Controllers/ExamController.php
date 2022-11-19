@@ -7,7 +7,8 @@ use App\Models\Question;
 
 class ExamController extends Controller
 {
-    public function showQuestions(Request $request){
+    public function showQuestions(Request $request)
+    {
         $questionModel = new Question();
         list($questions, $seed) = $questionModel->getQuestions($request);
 
@@ -22,13 +23,13 @@ class ExamController extends Controller
         $aryKey = array_keys($choices);
         shuffle($aryKey);
         $randomChoices = array();
-        foreach($aryKey as $key){
+        foreach ($aryKey as $key) {
             $randomChoices[$key] = $choices[$key];
         }
 
         // answerを配列にする処理
         $aryAnswer = str_split($questions[0]->answer);
-        foreach($aryAnswer as $key => $value){
+        foreach ($aryAnswer as $key => $value) {
             $aryAnswer[$key] = "choice" . $value;
         }
 

@@ -16,7 +16,7 @@
                     <p>{{ $questions[0]->caption }}</p>
                     <h4>選択肢</h4>
                     @foreach ($randomChoices as $key => $value)
-                        <div class="form-check rounded" >
+                        <div class="form-check rounded">
                             <input type="checkbox" name="choice" class="form-check-input" id="{{ $key }}"
                                 value="{{ $key }}">
                             <label for="{{ $key }}" class="form-check-label">{{ $value }}</label>
@@ -27,10 +27,12 @@
                             <a class="btn btn-primary" onclick="checkChoice()" role="button">正解を確認</a>
                         </p>
                         <div id="next-btn" class="pt-3 d-none">
-                            @if( $questions->currentPage()  === $questions->lastPage() )
+                            @if ($questions->currentPage() === $questions->lastPage())
                                 <a class="btn btn-secondary" onclick="finishQuestion()" role="button">終わり</a>
                             @else
-                                <a class="btn btn-secondary" href="{{ $questions->appends(request()->query())->appends(['seed' => $seed])->nextPageUrl() }}" role="button">次の問題へ</a>
+                                <a class="btn btn-secondary"
+                                    href="{{ $questions->appends(request()->query())->appends(['seed' => $seed])->nextPageUrl() }}"
+                                    role="button">次の問題へ</a>
                             @endif
                         </div>
                     </div>
@@ -60,9 +62,9 @@
         const examPage = document.getElementById('exam-page');
         const finishPage = document.getElementById('finish-page');
 
-        window.onload = function(){
+        window.onload = function() {
             let finishQNumber = currentPage % examNumber
-            if( finishQNumber == 1 && currentPage != 1 ){
+            if (finishQNumber == 1 && currentPage != 1) {
                 examPage.classList.add('d-none')
                 finishPage.classList.remove('d-none')
             }

@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('top');
 });
 
-Route::prefix('questions')->group(function(){
+Route::prefix('questions')->group(function () {
     Route::get('/select_exam', [SelectExamController::class, 'showSubjects']);
     Route::get('/exam', [ExamController::class, 'showQuestions']);
 });
@@ -32,4 +32,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

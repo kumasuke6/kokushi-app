@@ -13,40 +13,46 @@
                     <form action="{{ url('questions/exam') }}" method="get">
                         <div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="harf-am" name="harfDivs[]" value="1" checked>
+                                <input class="form-check-input" type="checkbox" id="harf-am" name="harfDivs[]"
+                                    value="1" checked>
                                 <label class="form-check-label" for="harf-am">午前問題すべて</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="harf-pm" name="harfDivs[]" value="2" checked>
+                                <input class="form-check-input" type="checkbox" id="harf-pm" name="harfDivs[]"
+                                    value="2" checked>
                                 <label class="form-check-label" for="harf-pm">午後問題すべて</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="random" name="random" value="1">
+                                <input class="form-check-input" type="checkbox" id="random" name="random"
+                                    value="1">
                                 <label class="form-check-label" for="random">出題順をランダムにする</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="q-number" name="examNumber" value="2" checked>
+                                <input class="form-check-input" type="checkbox" id="q-number" name="examNumber"
+                                    value="2" checked>
                                 <label class="form-check-label" for="examNumber">2問ずつ出題</label>
                             </div>
                         </div>
                         <div class="d-flex">
                             <div class="d-flex flex-column">
-                                @foreach($subjects as $subject)
-                                    @if($subject->harf_div  === 1)
-                                    <label class="my-1 me-1 px-1 border rounded">
-                                        <input class="form-check-input me-1 q-item" type="checkbox" name="ids[]" value="{{ $subject->id }}">
-                                        第{{ $subject->number }}回（{{ $subject->year }}年）午前
-                                    </label>
+                                @foreach ($subjects as $subject)
+                                    @if ($subject->harf_div === 1)
+                                        <label class="my-1 me-1 px-1 border rounded">
+                                            <input class="form-check-input me-1 q-item" type="checkbox" name="ids[]"
+                                                value="{{ $subject->id }}">
+                                            第{{ $subject->number }}回（{{ $subject->year }}年）午前
+                                        </label>
                                     @endif
                                 @endforeach
                             </div>
                             <div class="d-flex flex-column">
-                                @foreach($subjects as $subject)
-                                    @if($subject->harf_div  === 2)
-                                    <label class="my-1 me-1 px-1 border rounded">
-                                        <input class="form-check-input me-1 q-item" type="checkbox" name="ids[]" value="{{ $subject->id }}">
-                                        第{{ $subject->number }}回（{{ $subject->year }}年）午後
-                                    </label>
+                                @foreach ($subjects as $subject)
+                                    @if ($subject->harf_div === 2)
+                                        <label class="my-1 me-1 px-1 border rounded">
+                                            <input class="form-check-input me-1 q-item" type="checkbox" name="ids[]"
+                                                value="{{ $subject->id }}">
+                                            第{{ $subject->number }}回（{{ $subject->year }}年）午後
+                                        </label>
                                     @endif
                                 @endforeach
                             </div>

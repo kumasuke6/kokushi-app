@@ -10,7 +10,8 @@ class Subject extends Model
 {
     public $timestamps = false;
 
-    public function getSubjects(string $type) {
+    public function getSubjects(string $type)
+    {
         $subjects = DB::table('subjects')
             ->select('*')
             ->where('type', $type)
