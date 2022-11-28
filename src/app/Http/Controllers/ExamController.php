@@ -10,7 +10,7 @@ class ExamController extends Controller
     public function showQuestions(Request $request)
     {
         $questionModel = new Question();
-        list($questions, $seed) = $questionModel->getQuestions($request);
+        list($questions, $seed) = $questionModel->getQuestions($request->seed, $request->ids, $request->random);
 
         // choiceをランダムにする処理
         $choices = array(

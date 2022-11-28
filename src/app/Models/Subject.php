@@ -10,18 +10,18 @@ class Subject extends Model
 {
     public $timestamps = false;
 
-    public function getSubjects(string $type = '')
+    public function getSubjects(?int $type = null)
     {
         $query = DB::table('subjects')
             ->select('*');
-        if ($type != '') {
+        if (!is_null($type)) {
             $query->where('type', $type);
         }
         $subjects = $query->orderByDesc('subjects.year')->get();
         return $subjects;
     }
 
-    public function getSubjectsForValidation($type, $year, $harf_div)
+    public function getSubjectsForValidation(int $type, int $year, int $harf_div)
     {
         $count = DB::table('subjects')
             ->where('type', $type)
@@ -31,7 +31,7 @@ class Subject extends Model
         return $count;
     }
 
-    public function insertSubject($type, $name, $year, $number, $harfDiv)
+    public function insertSubject(int $type, string $name, int $year, int $number, int $harfDiv)
     {
         DB::table('subjects')->insert([
             'type' => $type,
@@ -43,7 +43,7 @@ class Subject extends Model
         return;
     }
 
-    public function deleteSubject($id)
+    public function deleteSubject(int $id)
     {
         DB::table('subjects')->where('id', $id)->delete();
         return;

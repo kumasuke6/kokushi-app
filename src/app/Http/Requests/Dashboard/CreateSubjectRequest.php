@@ -38,6 +38,10 @@ class CreateSubjectRequest extends FormRequest
         $year = $this->input('year');
         $harf_div = $this->input('harfDiv');
 
+        if (is_null($type) || is_null($year) || is_null($harf_div)) {
+            return;
+        }
+
         $validator->after(function ($validator) use ($type, $year, $harf_div) {
             $subject = new Subject();
             $count = $subject->getSubjectsForValidation($type, $year, $harf_div);
