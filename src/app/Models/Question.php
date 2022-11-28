@@ -28,4 +28,12 @@ class Question extends Model
         $questions = $query->paginate(1);
         return [$questions, $seed];
     }
+
+    public function getQuestionsForDeleteSubject($id)
+    {
+        $count = DB::table('questions')
+            ->where('subject_id', $id)
+            ->count();
+        return $count;
+    }
 }

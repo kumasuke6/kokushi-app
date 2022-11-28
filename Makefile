@@ -20,6 +20,10 @@ model:
 migrate:
 	$(EXEC_APP) php artisan migrate:fresh --seed
 
+# make request request=[リクエスト名]
+request:
+	$(EXEC_APP) php artisan make:request ${request}
+
 # make artisan artisan=[コード]
-artisan:
-	$(EXEC_APP) php artisan ${artisan}
+exec-app:
+	docker-compose exec app bash

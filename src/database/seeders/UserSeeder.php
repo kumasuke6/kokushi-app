@@ -19,19 +19,27 @@ class UserSeeder extends Seeder
     {
         $params = [
             [
-                'name' => 'test@gmail.com',
+                'name' => 'テスト1',
                 'email' => 'test@gmail.com',
+                'type' => 0,
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'test2@gmail.com',
+                'name' => 'テスト2',
                 'email' => 'test2@gmail.com',
+                'type' => 1,
                 'password' => Hash::make('password2'),
+            ],
+            [
+                'name' => 'テスト3',
+                'email' => 'test3@gmail.com',
+                'type' => 2,
+                'password' => Hash::make('password3'),
             ]
         ];
 
         $now = Carbon::now();
-        foreach ($params as $param){
+        foreach ($params as $param) {
             $param['created_at'] = $now;
             $param['updated_at'] = $now;
             DB::table('users')->insert($param);

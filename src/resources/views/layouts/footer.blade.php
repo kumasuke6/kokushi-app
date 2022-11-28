@@ -1,5 +1,5 @@
 @section('footer')
-    <footer class="footer px-md-0 border-top">
+    <footer id="footer" class="footer px-md-0 border-top">
         <div class="container">
             <p>&copy; 会社名 2017–2022</p>
         </div>

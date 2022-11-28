@@ -18,12 +18,12 @@ return new class extends Migration
             $table->integer('subject_id');
             $table->integer('question_number');
             $table->text('caption');
+            $table->string('caption_img')->nullable();
             $table->string('choice1')->nullable();
             $table->string('choice2')->nullable();
             $table->string('choice3')->nullable();
             $table->string('choice4')->nullable();
             $table->string('choice5')->nullable();
-            $table->string('question_img')->nullable();
             $table->string('choice_img1')->nullable();
             $table->string('choice_img2')->nullable();
             $table->string('choice_img3')->nullable();

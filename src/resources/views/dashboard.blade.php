@@ -5,298 +5,268 @@
 @include('layouts.head')
 @include('layouts.header')
 @section('content')
-    <h1>route()->getName()：{{ Request::route()->getName() }}</h1>
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                <span data-feather="home" class="align-text-bottom"></span>
-                                ダッシュボード
-                            </a>
+                        <li class="nav-item" role="presentation">
+                            <button type="button" class="nav-link border-0 bg-light active" id="create-exam-tab"
+                                data-bs-toggle="tab" data-bs-target="#create-exam-tab-pane" role="tab"
+                                aria-controls="create-exam-tab-pane" aria-selected="false">試験登録</button>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file" class="align-text-bottom"></span>
-                                オーダー
-                            </a>
+                        <li class="nav-item" role="presentation">
+                            <button type="button" class="nav-link border-0 bg-light" id="create-q-tab" data-bs-toggle="tab"
+                                data-bs-target="#create-q-tab-pane" role="tab" aria-controls="create-q-tab-pane"
+                                aria-selected="false">問題登録</button>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                                製品
-                            </a>
+                        <li class="nav-item" role="presentation">
+                            <div class="dropdown">
+                                <button class="nav-link border-0 bg-light dropdown-toggle" type="button" id="list-q-tab"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    問題一覧
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="list-q-tab">
+                                    <li><a class="dropdown-item" href="{{ url('dashboard/questions') }}">第55回理学療法士</a></li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="users" class="align-text-bottom"></span>
-                                顧客
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-                                報告
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="layers" class="align-text-bottom"></span>
-                                統合
-                            </a>
-                        </li>
-                    </ul>
-
-                    <h6
-                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-                        <span>保存されたレポート</span>
-                        <a class="d-flex align-items-center text-muted" href="#">
-                            <span data-feather="plus-circle" class="align-text-bottom"></span>
-                        </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                今月
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                前四半期
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                社会的関与
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text" class="align-text-bottom"></span>
-                                年末販売
-                            </a>
+                        <li class="nav-item" role="presentation">
+                            <a href="{{ url('dashboard/users') }}" class="nav-link border-0 bg-light"
+                                id="users-tab">ユーザー一覧</a>
                         </li>
                     </ul>
                 </div>
             </nav>
-
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">ダッシュボード</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">シェア</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">輸出</button>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <span data-feather="calendar" class="align-text-bottom"></span>
-                            今週
-                        </button>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="create-exam-tab-pane" role="tabpanel" aria-labelledby="create-exam-tab"
+                        tabindex="0">
+                        <h1>試験登録</h1>
+                        <form action="{{ url('dashboard/createSubject') }}" method="post">
+                            @csrf
+                            <p class="h5">試験種別</p>
+                            <div class="d-flex mb-3">
+                                <div class="form-group me-2">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="type" value="0">
+                                        理学療法士国家試験
+                                    </label>
+                                </div>
+                                <div class="form-group me-2">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="type" value="1">
+                                        理学療法士オリジナル
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="mb-3 me-2">
+                                    <label for="year" class="form-label h5">年度</label>
+                                    <input type="number" name="year" class="form-control" id="year" min="2010"
+                                        max="2050">
+                                </div>
+                                <div class="mb-3 me-2">
+                                    <label for="number" class="form-label h5">実施回</label>
+                                    <input type="number" name="number" class="form-control" id="number" min="50"
+                                        max="100">
+                                </div>
+                            </div>
+                            <p class="h5">午前・午後区分</p>
+                            <div class="d-flex mb-3">
+                                <div class="form-group me-2">
+                                    <input class="form-check-input" type="radio" name="harfDiv" id="am"
+                                        value="1" checked>
+                                    <label class="form-check-label" for="am">
+                                        午前
+                                    </label>
+                                </div>
+                                <div class="form-group me-2">
+                                    <input class="form-check-input" type="radio" name="harfDiv" id="pm"
+                                        value="2">
+                                    <label class="form-check-label" for="pm">
+                                        午後
+                                    </label>
+                                </div>
+                                <div class="form-group me-2">
+                                    <input class="form-check-input" type="radio" name="harfDiv" id="none"
+                                        value="0">
+                                    <label class="form-check-label" for="none">
+                                        なし
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">作成</button>
+                            </div>
+                        </form>
+                        <h2>試験一覧</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>試験名</th>
+                                    <th>試験年度</th>
+                                    <th>試験実施回</th>
+                                    <th>午前・午後</th>
+                                    <th>削除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($subjects as $subject)
+                                    <tr>
+                                        <th>{{ $subject->name }}</th>
+                                        <th>{{ $subject->year }}年</th>
+                                        <th>{{ $subject->number }}回</th>
+                                        <th>
+                                            @if ($subject->harf_div == '1')
+                                                午前
+                                            @elseif ($subject->harf_div == '2')
+                                                午後
+                                            @else
+                                                なし
+                                            @endif
+                                        </th>
+                                        <th>
+                                            <form action="{{ url('dashboard/deleteSubject') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $subject->id }}">
+                                                <button type="submit" class="btn btn-danger">削除</button>
+                                            </form>
+                                        </th>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="create-q-tab-pane" role="tabpanel" aria-labelledby="create-q-tab"
+                        tabindex="0">
+                        <h1 class="display-6">問題登録</h1>
+                        <form action="">
+                            <div class="mb-3">
+                                <label for="examName" class="form-label h5">試験選択</label>
+                                <select class="form-select" id="inputGroupSelect01">
+                                    <option value="1" selected>理学療法士国家試験　年数を表示</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="d-flex">
+                                <div class="mb-3 me-2">
+                                    <label for="q-number" class="form-label h5">問題番号</label>
+                                    <input type="number" name="q-number" class="form-control" id="q-number"
+                                        min="1" max="100">
+                                </div>
+                                <div class="mb-3 me-2">
+                                    <label for="answer" class="form-label h5">回答</label>
+                                    <input type="number" name="answer" class="form-control" id="answer">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="caption" class="form-label h5">問題説明</label>
+                                <textarea name="caption" class="form-control" id="caption"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="captionImg">
+                            </div>
+                            <div class="mb-3">
+                                <div>
+                                    <h2 class="h5">選択肢</h2>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="choice1">（1）</span>
+                                        <input name="choice[]" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="file" id="choiceImg1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="choice2">（2）</span>
+                                        <input name="choice[]" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="file" id="choiceImg2">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="choice3">（3）</span>
+                                        <input name="choice[]" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="file" id="choiceImg3">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="choice4">（4）</span>
+                                        <input name="choice[]" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="file" id="choiceImg4">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="choice5">（5）</span>
+                                        <input name="choice[]" type="text" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="file" id="choiceImg5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="explan" class="form-label h5">解説</label>
+                                <textarea name="explan" class="form-control" id="explan"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="explanImg">
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" type="checkbox" name="inappropriateFlg"
+                                    id="inappropriateFlg" value="1">
+                                <label for="inappropriateFlg" class="form-check-label">不適切フラグ</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab-pane"
+                        tabindex="0">
+                        <h1 class="display-6">ユーザー一覧</h1>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ユーザー名</th>
+                                    <th>Email</th>
+                                    <th>ユーザータイプ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <th>サンプル太郎</th>
+                                    <th>sample@gmail.com</th>
+                                    <th>無料会員</th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-                <h2>セクションタイトル</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">見出し</th>
-                                <th scope="col">見出し</th>
-                                <th scope="col">見出し</th>
-                                <th scope="col">見出し</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>あお</td>
-                                <td>交</td>
-                                <td>小</td>
-                                <td>記</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>いね</td>
-                                <td>鋼</td>
-                                <td>省</td>
-                                <td>黄</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>うた</td>
-                                <td>抗</td>
-                                <td>商</td>
-                                <td>木</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>えま</td>
-                                <td>工</td>
-                                <td>匠</td>
-                                <td>規</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>おか</td>
-                                <td>項</td>
-                                <td>生</td>
-                                <td>機</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>かさ</td>
-                                <td>孔</td>
-                                <td>章</td>
-                                <td>期</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>きじ</td>
-                                <td>構</td>
-                                <td>証</td>
-                                <td>既</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>くり</td>
-                                <td>高</td>
-                                <td>章</td>
-                                <td>気</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>けち</td>
-                                <td>孝</td>
-                                <td>少</td>
-                                <td>基</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>こま</td>
-                                <td>功</td>
-                                <td>将</td>
-                                <td>貴</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>さら</td>
-                                <td>公</td>
-                                <td>招</td>
-                                <td>着</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>しか</td>
-                                <td>甲</td>
-                                <td>庄</td>
-                                <td>樹</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>すぎ</td>
-                                <td>候</td>
-                                <td>性</td>
-                                <td>来</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>せみ</td>
-                                <td>考</td>
-                                <td>頌</td>
-                                <td>奇</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>そと</td>
-                                <td>講</td>
-                                <td>勝</td>
-                                <td>器</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.table-responsive -->
             </main>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
-    //JavaScriptプラグインの設定など
-    <!-- アイコン -->
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
-    </script>
-    <!-- グラフ -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
-    </script>
-    <!-- JSの設定ファイル -->
+@endsection
+@section('pageJs')
     <script>
-        /* グローバル Chart:false, feather:false */
-
-        (() => {
-            'use strict'
-
-            feather.replace({
-                'aria-hidden': 'true'
-            })
-
-            // グラフ
-            const ctx = document.getElementById('myChart')
-            // eslint-disable-next-line no-unused-vars
-            const myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [
-                        '日曜日',
-                        '月曜日',
-                        '火曜日',
-                        '水曜日',
-                        '木曜日',
-                        '金曜日',
-                        '土曜日'
-                    ],
-                    datasets: [{
-                        data: [
-                            15339,
-                            21345,
-                            18483,
-                            24003,
-                            23489,
-                            24092,
-                            12034
-                        ],
-                        lineTension: 0,
-                        backgroundColor: 'transparent',
-                        borderColor: '#007bff',
-                        borderWidth: 4,
-                        pointBackgroundColor: '#007bff'
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: false
-                            }
-                        }]
-                    },
-                    legend: {
-                        display: false
-                    }
-                }
-            })
-        })()
+        var headerContainerClassList = document.getElementById("header-container").classList;
+        var footer = document.getElementById("footer").classList;
+        window.onload = function() {
+            headerContainerClassList.remove("container");
+            headerContainerClassList.add("container-fluid");
+            footer.add("d-none");
+        }
     </script>
 @endsection
 @include('layouts.footer')
