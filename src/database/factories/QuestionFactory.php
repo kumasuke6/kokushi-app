@@ -19,8 +19,10 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            'subject_id' => rand(1,4),
-            'question_number' => function () { return self::$sequence++; },
+            'subject_id' => rand(1, 4),
+            'number' => function () {
+                return self::$sequence++;
+            },
             'caption' => $this->faker->sentence(),
         ];
     }

@@ -19,7 +19,7 @@ class QuestionSeeder extends Seeder
         $params = [
             [
                 'subject_id' => 1,
-                'question_number' => 1,
+                'number' => 1,
                 'caption' => '75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。',
                 'choice1' => 'N 95 マスクを装着する。',
                 'choice2' => '個室のドアは開放してはならない。',
@@ -31,7 +31,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 2,
-                'question_number' => 2,
+                'number' => 2,
                 'caption' => '四肢長計測の起点または終点の指標となるのはどれか。つ選べ。',
                 'choice1' => '肩峰の最前端部',
                 'choice2' => '上腕骨外側上顆の外側突出部',
@@ -43,7 +43,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 3,
-                'question_number' => 3,
+                'number' => 3,
                 'caption' => '75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。',
                 'choice1' => 'N 95 マスクを装着する。',
                 'choice2' => '個室のドアは開放してはならない。',
@@ -55,7 +55,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 4,
-                'question_number' => 4,
+                'number' => 4,
                 'caption' => '四肢長計測の起点または終点の指標となるのはどれか。つ選べ。',
                 'choice1' => '肩峰の最前端部',
                 'choice2' => '上腕骨外側上顆の外側突出部',
@@ -67,7 +67,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 1,
-                'question_number' => 5,
+                'number' => 5,
                 'caption' => '75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。',
                 'choice1' => 'N 95 マスクを装着する。',
                 'choice2' => '個室のドアは開放してはならない。',
@@ -79,7 +79,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 2,
-                'question_number' => 6,
+                'number' => 6,
                 'caption' => '四肢長計測の起点または終点の指標となるのはどれか。つ選べ。',
                 'choice1' => '肩峰の最前端部',
                 'choice2' => '上腕骨外側上顆の外側突出部',
@@ -91,7 +91,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 3,
-                'question_number' => 7,
+                'number' => 7,
                 'caption' => '75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。',
                 'choice1' => 'N 95 マスクを装着する。',
                 'choice2' => '個室のドアは開放してはならない。',
@@ -103,7 +103,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 4,
-                'question_number' => 8,
+                'number' => 8,
                 'caption' => '四肢長計測の起点または終点の指標となるのはどれか。つ選べ。',
                 'choice1' => '肩峰の最前端部',
                 'choice2' => '上腕骨外側上顆の外側突出部',
@@ -115,7 +115,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 1,
-                'question_number' => 9,
+                'number' => 9,
                 'caption' => '75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。',
                 'choice1' => 'N 95 マスクを装着する。',
                 'choice2' => '個室のドアは開放してはならない。',
@@ -127,7 +127,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 2,
-                'question_number' => 10,
+                'number' => 10,
                 'caption' => '四肢長計測の起点または終点の指標となるのはどれか。つ選べ。',
                 'choice1' => '肩峰の最前端部',
                 'choice2' => '上腕骨外側上顆の外側突出部',
@@ -139,7 +139,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 3,
-                'question_number' => 11,
+                'number' => 11,
                 'caption' => '75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。',
                 'choice1' => 'N 95 マスクを装着する。',
                 'choice2' => '個室のドアは開放してはならない。',
@@ -151,7 +151,7 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'subject_id' => 4,
-                'question_number' => 12,
+                'number' => 12,
                 'caption' => '四肢長計測の起点または終点の指標となるのはどれか。つ選べ。',
                 'choice1' => '肩峰の最前端部',
                 'choice2' => '上腕骨外側上顆の外側突出部',
@@ -164,7 +164,7 @@ class QuestionSeeder extends Seeder
         ];
 
         $now = Carbon::now();
-        foreach ($params as $param){
+        foreach ($params as $param) {
             $param['created_at'] = $now;
             $param['updated_at'] = $now;
             DB::table('questions')->insert($param);

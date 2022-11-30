@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\CreateSubjectRequest;
 use App\Http\Requests\Dashboard\DeleteSubjectRequest;
+use App\Http\Requests\Dashboard\QuestionListRequest;
 use App\Models\Subject;
+use App\Models\Question;
 
 class DashboardController extends Controller
 {
@@ -16,9 +18,16 @@ class DashboardController extends Controller
         return view('dashboard', ['subjects' => $subjects]);
     }
 
-    public function showDashboardQuestions()
+    public function showDashboardQuestionList(QuestionListRequest $request)
     {
-        return view('dashboard_questions');
+        $question = new Question();
+        $questions = $question->getQuestionListForDashboard($request->id);
+        return view('dashboard_question_list', ['subjectNumber' => $request->number, 'questions' => $questions]);
+    }
+
+    public function showDashboardQuestion()
+    {
+        return view('dashboard_question');
     }
 
     public function showDashboardUsers()

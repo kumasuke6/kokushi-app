@@ -29,11 +29,20 @@ class Question extends Model
         return [$questions, $seed];
     }
 
-    public function getQuestionsForDeleteSubject(int $id)
+    public function getQuestionsForDeleteSubject(int $subject_id)
     {
         $count = DB::table('questions')
-            ->where('subject_id', $id)
+            ->where('subject_id', $subject_id)
             ->count();
         return $count;
+    }
+
+    public function getQuestionListForDashboard(int $subject_id)
+    {
+        $questions = DB::table('questions')
+            ->select('id', 'number', 'caption')
+            ->where('subject_id', $subject_id)
+            ->get();
+        return $questions;
     }
 }

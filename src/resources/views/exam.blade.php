@@ -10,7 +10,7 @@
             <div class="row">
                 <div id="exam-page" class="col-lg-8 pt-3">
                     <div>
-                        <p>第{{ $questions[0]->number }}回{{ $questions[0]->name }}　問題{{ $questions[0]->question_number }}</p>
+                        <p>第{{ $questions[0]->number }}回{{ $questions[0]->name }}　問題{{ $questions[0]->number }}</p>
                     </div>
                     <h3>問題</h3>
                     <p>{{ $questions[0]->caption }}</p>

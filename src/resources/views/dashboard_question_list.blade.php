@@ -7,25 +7,28 @@
 @section('content')
     <div class="container-fluid">
         <main>
-            <h1 class="display-6">第55回理学療法士国家試験</h1>
+            <h1>第{{ $subjectNumber }}回理学療法士国家試験</h1>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>年度</th>
                         <th>番号</th>
                         <th>説明文</th>
                         <th>編集</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>2022</th>
-                        <th>1</th>
-                        <th>75 歳の女性。誤嚥性肺炎。喀痰培養で MRSA を検出した。マスク、手袋、ガウンを装着し病棟個室で肺理学療法を開始した。感染予防策について正しいのはどれか。</th>
-                        <th>
-                            <a href="" class="btn btn-primary">編集</a>
-                        </th>
-                    </tr>
+                    @foreach ($questions as $question)
+                        <tr>
+                            <th>{{ $question->number }}</th>
+                            <th>{{ $question->caption }}</th>
+                            <th>
+                                <form action="{{ url('dashboard/question') }}" method="get">
+                                    <input type="hidden" name="id" value="{{ $question->id }}">
+                                    <button class="btn btn-primary">編集</button>
+                                </form>
+                            </th>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </main>

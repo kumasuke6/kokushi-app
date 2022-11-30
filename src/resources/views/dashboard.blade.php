@@ -27,7 +27,16 @@
                                     問題一覧
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="list-q-tab">
-                                    <li><a class="dropdown-item" href="{{ url('dashboard/questions') }}">第55回理学療法士</a></li>
+                                    @foreach ($subjects as $subject)
+                                        <li>
+                                            <form action="{{ url('dashboard/questionList') }}" method="get">
+                                                <input type="hidden" name="id" value="{{ $subject->id }}">
+                                                <input type="hidden" name="number" value="{{ $subject->number }}">
+                                                <button type="submit"
+                                                    class="dropdown-item">第{{ $subject->number }}回{{ $subject->name }}</button>
+                                            </form>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </li>
@@ -149,11 +158,12 @@
                     </div>
                     <div class="tab-pane" id="create-q-tab-pane" role="tabpanel" aria-labelledby="create-q-tab"
                         tabindex="0">
-                        <h1 class="display-6">問題登録</h1>
-                        <form action="">
+                        <h1>問題登録</h1>
+                        <form action="{{ url('dashboard/createQuestion') }}" method="post">
+                            @csrf
                             <div class="mb-3">
                                 <label for="examName" class="form-label h5">試験選択</label>
-                                <select class="form-select" id="inputGroupSelect01">
+                                <select class="form-select" name="subject" id="inputGroupSelect01">
                                     <option value="1" selected>理学療法士国家試験　年数を表示</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
@@ -162,7 +172,7 @@
                             <div class="d-flex">
                                 <div class="mb-3 me-2">
                                     <label for="q-number" class="form-label h5">問題番号</label>
-                                    <input type="number" name="q-number" class="form-control" id="q-number"
+                                    <input type="number" name="number" class="form-control" id="q-number"
                                         min="1" max="100">
                                 </div>
                                 <div class="mb-3 me-2">
