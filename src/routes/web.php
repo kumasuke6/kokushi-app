@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SelectExamController;
+use App\Http\Controllers\TopController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\DashboardController;
 
@@ -20,12 +20,9 @@ Route::get('/welcome', function () {
     return view('/welcome');
 });
 
-Route::get('/', function () {
-    return view('top');
-});
+Route::get('/', [TopController::class, 'showSubjects']);
 
 Route::prefix('questions')->group(function () {
-    Route::get('/selectExam', [SelectExamController::class, 'showSubjects']);
     Route::get('/exam', [ExamController::class, 'showQuestions']);
 });
 

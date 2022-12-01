@@ -10,20 +10,65 @@
             <img src="/img/top.jpg">
         </div>
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-8 pt-3">
-                    <h2>理学療法士国家試験</h2>
-                    <p>5年間の理学療法士国家試験を出題</p>
-                    <form action="{{ url('questions/selectExam') }}" method="get">
-                        <input type="hidden" name="type" value="0">
-                        <input type="submit" value="詳細を見る" class="btn btn-primary">
+                    <h2>{{ $subjects[0]->name }}</h2>
+                    <form action="{{ url('questions/exam') }}" method="get">
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="harf-am" name="harfDivs[]"
+                                    value="1" checked>
+                                <label class="form-check-label" for="harf-am">午前問題すべて</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="harf-pm" name="harfDivs[]"
+                                    value="2" checked>
+                                <label class="form-check-label" for="harf-pm">午後問題すべて</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="random" name="random"
+                                    value="1">
+                                <label class="form-check-label" for="random">出題順をランダムにする</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="q-number" name="examNumber"
+                                    value="2" checked>
+                                <label class="form-check-label" for="examNumber">2問ずつ出題</label>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="d-flex flex-column">
+                                @foreach ($subjects as $subject)
+                                    @if ($subject->harf_div === 1)
+                                        <label class="my-1 me-1 px-1 border rounded">
+                                            <input class="form-check-input me-1 q-item" type="checkbox" name="ids[]"
+                                                value="{{ $subject->id }}">
+                                            第{{ $subject->number }}回（{{ $subject->year }}年）午前
+                                        </label>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div class="d-flex flex-column">
+                                @foreach ($subjects as $subject)
+                                    @if ($subject->harf_div === 2)
+                                        <label class="my-1 me-1 px-1 border rounded">
+                                            <input class="form-check-input me-1 q-item" type="checkbox" name="ids[]"
+                                                value="{{ $subject->id }}">
+                                            第{{ $subject->number }}回（{{ $subject->year }}年）午後
+                                        </label>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        <p class="pt-3">
+                            <input class="btn btn-primary submit" type="submit" onclick="return isCheck()" value="スタート">
+                        </p>
                     </form>
                 </div>
+
                 <div class="col-lg-4 pt-3">
-                    <h2>見出し</h2>
-                    <p>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
-                    </p>
-                    <p><a class="btn btn-primary" href="#" role="button">詳細を見る</a></p>
+                    {{-- 広告などを入れるスペース --}}
                 </div>
             </div>
         </div>
