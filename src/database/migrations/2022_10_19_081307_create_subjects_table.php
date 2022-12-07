@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger("harf_div");
             $table->integer('number');
             $table->unique(['type', 'year', 'harf_div']);
+            $table->timestamps();
         });
     }
 

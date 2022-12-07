@@ -159,20 +159,30 @@
                     <div class="tab-pane" id="create-q-tab-pane" role="tabpanel" aria-labelledby="create-q-tab"
                         tabindex="0">
                         <h1>問題登録</h1>
-                        <form action="{{ url('dashboard/createQuestion') }}" method="post">
+                        <form action="{{ url('dashboard/createQuestion') }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="examName" class="form-label h5">試験選択</label>
-                                <select class="form-select" name="subject" id="inputGroupSelect01">
-                                    <option value="1" selected>理学療法士国家試験　年数を表示</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="form-select" name="subjectId" id="inputGroupSelect01">
+                                    @foreach ($subjects as $subject)
+                                        <option value="{{ $subject->id }}">
+                                            第{{ $subject->number }}回{{ $subject->name }}
+                                            @if ($subject->harf_div == '1')
+                                                午前
+                                            @elseif ($subject->harf_div == '2')
+                                                午後
+                                            @else
+                                                なし
+                                            @endif
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="d-flex">
                                 <div class="mb-3 me-2">
-                                    <label for="q-number" class="form-label h5">問題番号</label>
-                                    <input type="number" name="number" class="form-control" id="q-number"
+                                    <label for="number" class="form-label h5">問題番号</label>
+                                    <input type="number" name="number" class="form-control" id="number"
                                         min="1" max="100">
                                 </div>
                                 <div class="mb-3 me-2">
@@ -185,45 +195,45 @@
                                 <textarea name="caption" class="form-control" id="caption"></textarea>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="file" id="captionImg">
+                                <input class="form-control" type="file" name="captionImg">
                             </div>
                             <div class="mb-3">
                                 <div>
                                     <h2 class="h5">選択肢</h2>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice1">（1）</span>
-                                        <input name="choice[]" type="text" class="form-control">
+                                        <input name="choice1" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" id="choiceImg1">
+                                        <input class="form-control" type="file" name="choiceImg1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice2">（2）</span>
-                                        <input name="choice[]" type="text" class="form-control">
+                                        <input name="choice2" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" id="choiceImg2">
+                                        <input class="form-control" type="file" name="choiceImg2">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice3">（3）</span>
-                                        <input name="choice[]" type="text" class="form-control">
+                                        <input name="choice3" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" id="choiceImg3">
+                                        <input class="form-control" type="file" name="choiceImg3">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice4">（4）</span>
-                                        <input name="choice[]" type="text" class="form-control">
+                                        <input name="choice4" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" id="choiceImg4">
+                                        <input class="form-control" type="file" name="choiceImg4">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice5">（5）</span>
-                                        <input name="choice[]" type="text" class="form-control">
+                                        <input name="choice5" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" id="choiceImg5">
+                                        <input class="form-control" type="file" name="choiceImg5">
                                     </div>
                                 </div>
                             </div>
@@ -232,13 +242,18 @@
                                 <textarea name="explan" class="form-control" id="explan"></textarea>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="file" id="explanImg">
+                                <input class="form-control" type="file" name="explanImg">
                             </div>
                             <div class="mb-3">
-                                <input class="form-check-input" type="checkbox" name="inappropriateFlg"
-                                    id="inappropriateFlg" value="1">
-                                <label for="inappropriateFlg" class="form-check-label">不適切フラグ</label>
+                                <p class="form-label h5">不適切フラグ</p>
+                                <input class="form-check-input" type="radio" name="inappropriateFlg"
+                                    id="inappropriateFlgOff" value="0" checked>
+                                <label for="inappropriateFlgOff">OFF</label>
+                                <input class="form-check-input" type="radio" name="inappropriateFlg"
+                                    id="inappropriateFlgOn" value="1">
+                                <label for="inappropriateFlgOn">ON</label>
                             </div>
+                            <button type="submit" class="btn btn-primary">作成</button>
                         </form>
                     </div>
                     <div class="tab-pane" id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab-pane"

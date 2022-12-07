@@ -30,6 +30,7 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'showDashboard']);
     Route::post('/createSubject', [DashboardController::class, 'createSubject']);
     Route::post('/deleteSubject', [DashboardController::class, 'deleteSubject']);
+    Route::post('/createQuestion', [DashboardController::class, 'createQuestion']);
     Route::get('/questionList', [DashboardController::class, 'showDashboardQuestionList']);
     Route::get('/question', [DashboardController::class, 'showDashboardQuestion']);
     Route::get('/users', [DashboardController::class, 'showDashboardUsers']);

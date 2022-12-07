@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Dashboard\CreateQuestionRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\CreateSubjectRequest;
 use App\Http\Requests\Dashboard\DeleteSubjectRequest;
@@ -54,5 +55,33 @@ class DashboardController extends Controller
         $subject = new Subject();
         $subject->deleteSubject($request->id);
         return redirect('/dashboard');
+    }
+
+    public function createQuestion(CreateQuestionRequest $request)
+    {
+
+        $storedFiles = $this->putFile($request);
+        $question = new Question();
+        $question->createQuestion($request, $storedFiles);
+        return redirect('/dashboard');
+    }
+
+    private function putFile($request): array
+    {
+        $targets = array(
+            'captionImg' => null,
+            'choiceImg1' => null,
+            'choiceImg2' => null,
+            'choiceImg3' => null,
+            'choiceImg4' => null,
+            'choiceImg5' => null,
+            'explanImg'  => null,
+        );
+        foreach (array_keys($targets) as $target) {
+            if ($request->hasFile($target)) {
+                $targets[$target] = $request->file($target)->store('public/test_img');
+            }
+        }
+        return $targets;
     }
 }

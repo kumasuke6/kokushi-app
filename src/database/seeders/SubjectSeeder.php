@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SubjectSeeder extends Seeder
 {
@@ -21,6 +22,8 @@ class SubjectSeeder extends Seeder
                 'year' => 2021,
                 'number' => 56,
                 'harf_div' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'type' => 0,
@@ -28,6 +31,8 @@ class SubjectSeeder extends Seeder
                 'year' => 2021,
                 'number' => 56,
                 'harf_div' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'type' => 0,
@@ -35,6 +40,8 @@ class SubjectSeeder extends Seeder
                 'year' => 2022,
                 'number' => 57,
                 'harf_div' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'type' => 0,
@@ -42,10 +49,12 @@ class SubjectSeeder extends Seeder
                 'year' => 2022,
                 'number' => 57,
                 'harf_div' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
         ];
 
-        foreach ($params as $param){
+        foreach ($params as $param) {
             DB::table('subjects')->insert($param);
         }
     }

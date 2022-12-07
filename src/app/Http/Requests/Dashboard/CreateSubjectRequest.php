@@ -44,7 +44,7 @@ class CreateSubjectRequest extends FormRequest
 
         $validator->after(function ($validator) use ($type, $year, $harf_div) {
             $subject = new Subject();
-            $count = $subject->getSubjectsForValidation($type, $year, $harf_div);
+            $count = $subject->getSubjectsForCreateSubjectReq($type, $year, $harf_div);
             if ($count != 0) {
                 $validator->errors()->add('errMsg', '同じ試験が既にあります。');
             }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Subject extends Model
 {
@@ -21,7 +22,7 @@ class Subject extends Model
         return $subjects;
     }
 
-    public function getSubjectsForValidation(int $type, int $year, int $harf_div)
+    public function getSubjectsForCreateSubjectReq(int $type, int $year, int $harf_div)
     {
         $count = DB::table('subjects')
             ->where('type', $type)
@@ -38,7 +39,9 @@ class Subject extends Model
             'name' => $name,
             'year' => $year,
             'number' => $number,
-            'harf_div' => $harfDiv
+            'harf_div' => $harfDiv,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
         return;
     }
