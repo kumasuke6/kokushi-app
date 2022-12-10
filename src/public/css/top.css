@@ -8,6 +8,17 @@
     width: 100%;
 }
 
+.exam-image,
+.explan-image {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.q-image {
+    max-width: 100px;
+    max-height: 100px;
+}
+
 @media (min-width: 768px) {
     .navbar-nav .nav-item {
         -ms-flex: 1 0 auto;

@@ -14,11 +14,11 @@ class ExamController extends Controller
 
         // choiceをランダムにする処理
         $choices = array(
-            'choice1' => $questions[0]->choice1,
-            'choice2' => $questions[0]->choice2,
-            'choice3' => $questions[0]->choice3,
-            'choice4' => $questions[0]->choice4,
-            'choice5' => $questions[0]->choice5,
+            'choice1' => ['text' => $questions[0]->choice1, 'img' => $questions[0]->choice_img1],
+            'choice2' => ['text' => $questions[0]->choice1, 'img' => $questions[0]->choice_img2],
+            'choice3' => ['text' => $questions[0]->choice1, 'img' => $questions[0]->choice_img3],
+            'choice4' => ['text' => $questions[0]->choice1, 'img' => $questions[0]->choice_img4],
+            'choice5' => ['text' => $questions[0]->choice1, 'img' => $questions[0]->choice_img5],
         );
         $aryKey = array_keys($choices);
         shuffle($aryKey);
@@ -26,7 +26,6 @@ class ExamController extends Controller
         foreach ($aryKey as $key) {
             $randomChoices[$key] = $choices[$key];
         }
-
         // answerを配列にする処理
         $aryAnswer = str_split($questions[0]->answer);
         foreach ($aryAnswer as $key => $value) {

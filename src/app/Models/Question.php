@@ -19,6 +19,7 @@ class Question extends Model
         }
 
         $query = DB::table('questions')
+            ->select('questions.id', 'questions.subject_id', 'questions.number as question_number', 'questions.caption', 'questions.caption_img', 'questions.choice1', 'questions.choice2', 'questions.choice3', 'questions.choice4', 'questions.choice5', 'questions.choice_img1', 'questions.choice_img2', 'questions.choice_img3', 'questions.choice_img4', 'questions.choice_img5', 'questions.answer', 'questions.explan', 'questions.explan_img', 'questions.inappropriate_flg', 'subjects.type', 'subjects.name', 'subjects.year', 'subjects.number as subject_number', 'subjects.harf_div')
             ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
             ->whereIn('subject_id', $subject_ids);
         if ($random == 1) {

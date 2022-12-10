@@ -79,7 +79,9 @@ class DashboardController extends Controller
         );
         foreach (array_keys($targets) as $target) {
             if ($request->hasFile($target)) {
-                $targets[$target] = $request->file($target)->store('public/test_img');
+                $file_name = $request->file($target)->hashName();
+                $request->file($target)->storeAs('public/test_img', $file_name);
+                $targets[$target] = $file_name;
             }
         }
         return $targets;

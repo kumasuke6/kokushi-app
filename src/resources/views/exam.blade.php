@@ -10,16 +10,26 @@
             <div class="row">
                 <div id="exam-page" class="col-lg-8 pt-3">
                     <div>
-                        <p>第{{ $questions[0]->number }}回{{ $questions[0]->name }}　問題{{ $questions[0]->number }}</p>
+                        {{-- TODO: numberがおかしい --}}
+                        <p>第{{ $questions[0]->subject_number }}回{{ $questions[0]->name }}　問題{{ $questions[0]->question_number }}
+                        </p>
                     </div>
                     <h3>問題</h3>
                     <p>{{ $questions[0]->caption }}</p>
+                    @if (!is_null($questions[0]->caption_img))
+                        <img class="exam-image" src={{ url('/storage/test_img', $questions[0]->caption_img) }}>
+                    @endif
                     <h4>選択肢</h4>
-                    @foreach ($randomChoices as $key => $value)
+                    @foreach ($randomChoices as $key => $randomChoice)
                         <div class="form-check rounded">
                             <input type="checkbox" name="choice" class="form-check-input" id="{{ $key }}"
                                 value="{{ $key }}">
-                            <label for="{{ $key }}" class="form-check-label">{{ $value }}</label>
+                            <label for="{{ $key }}" class="form-check-label">
+                                <p class="mb-0">{{ $randomChoice['text'] }}</p>
+                                @if (!is_null($randomChoice['img']))
+                                    <img class="q-image" src={{ url('/storage/test_img', $randomChoice['img']) }}>
+                                @endif
+                            </label>
                         </div>
                     @endforeach
                     <div class="d-flex">
@@ -39,6 +49,9 @@
                     <div id="explan" class="d-none">
                         <h4 id="answer"></h4>
                         <p>{{ $questions[0]->explan }}</p>
+                        @if (!is_null($questions[0]->explan_img))
+                            <img class="explan-image" src={{ url('/storage/test_img', $questions[0]->explan_img) }}>
+                        @endif
                     </div>
                 </div>
                 <div id="finish-page" class="col-lg-8 pt-3 d-none">
