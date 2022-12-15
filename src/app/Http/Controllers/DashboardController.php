@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Dashboard\CreateQuestionRequest;
-use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\CreateSubjectRequest;
 use App\Http\Requests\Dashboard\DeleteSubjectRequest;
 use App\Http\Requests\Dashboard\QuestionListRequest;

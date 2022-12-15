@@ -20,14 +20,14 @@
                         <img class="exam-image" src={{ url('/storage/test_img', $questions[0]->caption_img) }}>
                     @endif
                     <h4>選択肢</h4>
-                    @foreach ($randomChoices as $key => $randomChoice)
+                    @foreach ($choices as $key => $choice)
                         <div class="form-check rounded">
                             <input type="checkbox" name="choice" class="form-check-input" id="{{ $key }}"
                                 value="{{ $key }}">
                             <label for="{{ $key }}" class="form-check-label">
-                                <p class="mb-0">{{ $randomChoice['text'] }}</p>
-                                @if (!is_null($randomChoice['img']))
-                                    <img class="q-image" src={{ url('/storage/test_img', $randomChoice['img']) }}>
+                                <p class="mb-0">{{ $choice['text'] }}</p>
+                                @if (!is_null($choice['img']))
+                                    <img class="q-image" src={{ url('/storage/test_img', $choice['img']) }}>
                                 @endif
                             </label>
                         </div>

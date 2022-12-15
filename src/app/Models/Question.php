@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class Question extends Model
 {
     use HasFactory;
-    public function getQuestions(?int $seed, array $subject_ids, ?int $random)
+    public function getQuestions(?int $seed, array $subject_ids, ?int $qRandom)
     {
         if (is_null($seed)) {
             $seed = rand(1, 9);
@@ -22,7 +22,7 @@ class Question extends Model
             ->select('questions.id', 'questions.subject_id', 'questions.number as question_number', 'questions.caption', 'questions.caption_img', 'questions.choice1', 'questions.choice2', 'questions.choice3', 'questions.choice4', 'questions.choice5', 'questions.choice_img1', 'questions.choice_img2', 'questions.choice_img3', 'questions.choice_img4', 'questions.choice_img5', 'questions.answer', 'questions.explan', 'questions.explan_img', 'questions.inappropriate_flg', 'subjects.type', 'subjects.name', 'subjects.year', 'subjects.number as subject_number', 'subjects.harf_div')
             ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
             ->whereIn('subject_id', $subject_ids);
-        if ($random == 1) {
+        if ($qRandom == 1) {
             $query->inRandomOrder($seed)
                 ->groupBy('questions.id');
         }
