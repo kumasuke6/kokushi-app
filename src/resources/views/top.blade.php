@@ -56,41 +56,41 @@
                         <div class="d-flex flex-column justify-content-center">
                             <div class="mb-2 d-flex justify-content-center">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="harf-am" name="harfDivs[]"
+                                    <input class="form-check-input" type="checkbox" id="harf-am" name="harf_divs[]"
                                         value="1" onclick="return harfDivAllCheck('am')">
                                     <label class="form-check-label" for="harf-am">午前問題すべて</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="harf-pm" name="harfDivs[]"
+                                    <input class="form-check-input" type="checkbox" id="harf-pm" name="harf_divs[]"
                                         value="2" onclick="return harfDivAllCheck('pm')">
                                     <label class="form-check-label" for="harf-pm">午後問題すべて</label>
                                 </div>
                             </div>
                             <div class="mb-2 d-flex justify-content-center">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="q-random" name="qRandom"
+                                    <input class="form-check-input" type="checkbox" id="q-random" name="q_random"
                                         value="1">
                                     <label class="form-check-label" for="q-random">出題順をランダムにする</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="choice-random" name="choiceRandom"
+                                    <input class="form-check-input" type="checkbox" id="choice-random" name="choice_random"
                                         value="1">
                                     <label class="form-check-label" for="choice-random">選択肢をランダムにする</label>
                                 </div>
                             </div>
                             <div class="mb-2 d-flex justify-content-center">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="exam-number2" name="examNumber"
+                                    <input class="form-check-input" type="radio" id="exam-number2" name="exam_number"
                                         value="2" checked>
                                     <label class="form-check-label" for="exam-number2">2問ずつ出題</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="exam-number10" name="examNumber"
+                                    <input class="form-check-input" type="radio" id="exam-number10" name="exam_number"
                                         value="10">
                                     <label class="form-check-label" for="exam-number10">10問ずつ出題</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="exam-number0" name="examNumber"
+                                    <input class="form-check-input" type="radio" id="exam-number0" name="exam_number"
                                         value="0">
                                     <label class="form-check-label" for="exam-number0">全問出題</label>
                                 </div>
@@ -102,7 +102,7 @@
                                     @if ($subject->harf_div === 1)
                                         <label class="my-1 me-1 px-1 border rounded">
                                             <input class="form-check-input me-1 q-item q-item-am" type="checkbox"
-                                                name="subjectIds[]" value="{{ $subject->id }}">
+                                                name="subject_ids[]" value="{{ $subject->id }}">
                                             第{{ $subject->number }}回（{{ $subject->year }}年）午前
                                         </label>
                                     @endif
@@ -113,7 +113,7 @@
                                     @if ($subject->harf_div === 2)
                                         <label class="my-1 me-1 px-1 border rounded">
                                             <input class="form-check-input me-1 q-item q-item-pm" type="checkbox"
-                                                name="subjectIds[]" value="{{ $subject->id }}">
+                                                name="subject_ids[]" value="{{ $subject->id }}">
                                             第{{ $subject->number }}回（{{ $subject->year }}年）午後
                                         </label>
                                     @endif

@@ -25,7 +25,6 @@ class DashboardController extends Controller
         $question = new Question();
         $subject = new Subject();
         $subjectResult = $subject->getSubjects(null, $request->id);
-        // dd($subjectResult);
         $questions = $question->getQuestionListForDashboard($request->id);
         return view('dashboard_question_list', ['subjectNumber' => $subjectResult[0]->number, 'questions' => $questions]);
     }
@@ -59,7 +58,7 @@ class DashboardController extends Controller
             case 1:
                 $name = "理学療法士オリジナル問題";
         }
-        $subject->insertSubject($request->type, $name, $request->year, $request->number, $request->harfDiv);
+        $subject->insertSubject($request->type, $name, $request->year, $request->number, $request->harf_div);
         return redirect('/dashboard');
     }
 
@@ -93,27 +92,6 @@ class DashboardController extends Controller
         $question->updateQuestion($update_columns);
         return redirect('/dashboard/questionList?id=' . $request->subject_id);
     }
-
-    // private function putFiles($request): array
-    // {
-    //     $targets = array(
-    //         'captionImg' => null,
-    //         'choiceImg1' => null,
-    //         'choiceImg2' => null,
-    //         'choiceImg3' => null,
-    //         'choiceImg4' => null,
-    //         'choiceImg5' => null,
-    //         'explanImg'  => null,
-    //     );
-    //     foreach (array_keys($targets) as $target) {
-    //         if ($request->hasFile($target)) {
-    //             $file_name = $request->file($target)->hashName();
-    //             $request->file($target)->storeAs('public/test_img', $file_name);
-    //             $targets[$target] = $file_name;
-    //         }
-    //     }
-    //     return $targets;
-    // }
 
     private function putFiles($request): array
     {

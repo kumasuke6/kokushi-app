@@ -92,21 +92,21 @@
                             <p class="h5">午前・午後区分</p>
                             <div class="d-flex mb-3">
                                 <div class="form-group me-2">
-                                    <input class="form-check-input" type="radio" name="harfDiv" id="am"
+                                    <input class="form-check-input" type="radio" name="harf_div" id="am"
                                         value="1" checked>
                                     <label class="form-check-label" for="am">
                                         午前
                                     </label>
                                 </div>
                                 <div class="form-group me-2">
-                                    <input class="form-check-input" type="radio" name="harfDiv" id="pm"
+                                    <input class="form-check-input" type="radio" name="harf_div" id="pm"
                                         value="2">
                                     <label class="form-check-label" for="pm">
                                         午後
                                     </label>
                                 </div>
                                 <div class="form-group me-2">
-                                    <input class="form-check-input" type="radio" name="harfDiv" id="none"
+                                    <input class="form-check-input" type="radio" name="harf_div" id="none"
                                         value="0">
                                     <label class="form-check-label" for="none">
                                         なし

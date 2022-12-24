@@ -28,7 +28,7 @@ class CreateSubjectRequest extends FormRequest
             'type' => ['required', 'integer'],
             'year' => ['required', 'integer'],
             'number' => ['required', 'integer'],
-            'harfDiv' => ['required', 'integer']
+            'harf_div' => ['required', 'integer']
         ];
     }
 
@@ -36,7 +36,7 @@ class CreateSubjectRequest extends FormRequest
     {
         $type = $this->input('type');
         $year = $this->input('year');
-        $harf_div = $this->input('harfDiv');
+        $harf_div = $this->input('harf_div');
 
         if (is_null($type) || is_null($year) || is_null($harf_div)) {
             return;
@@ -57,7 +57,7 @@ class CreateSubjectRequest extends FormRequest
             'type' => '試験種別',
             'year' => '年度',
             'number' => '実施回',
-            'harfDiv' => '午前・午後区分',
+            'harf_div' => '午前・午後区分',
         ];
     }
 }

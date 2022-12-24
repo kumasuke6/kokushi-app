@@ -24,9 +24,9 @@ class ShowQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'subjectIds' => ['required', 'array',],
-            'qRandom' => ['nullable', 'integer'],
-            'choiceRandom' => ['nullable', 'integer'],
+            'subject_ids' => ['required', 'array',],
+            'q_random' => ['nullable', 'integer'],
+            'choice_random' => ['nullable', 'integer'],
             'seed' => ['nullable', 'integer']
         ];
     }
@@ -34,9 +34,9 @@ class ShowQuestionRequest extends FormRequest
     public function attributes()
     {
         return [
-            'subjectIds' => '試験問題',
-            'qRandom' => '出題順をランダムにする',
-            'choiceRandom' => '選択肢をランダムにする',
+            'subject_ids' => '試験問題',
+            'q_random' => '出題順をランダムにする',
+            'choice_random' => '選択肢をランダムにする',
         ];
     }
 }
