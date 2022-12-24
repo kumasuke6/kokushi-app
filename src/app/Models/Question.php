@@ -30,6 +30,14 @@ class Question extends Model
         return [$questions, $seed];
     }
 
+    public function getQuestion(int $id)
+    {
+        $question = DB::table('questions')
+            ->where('id', $id)
+            ->get();
+        return $question;
+    }
+
     public function getQuestionsForDeleteSubject(int $subject_id)
     {
         $count = DB::table('questions')
@@ -56,29 +64,37 @@ class Question extends Model
         return $count;
     }
 
-    public function createQuestion($request, array $storedFile)
+    public function createQuestion(array $columns)
     {
-        DB::table('questions')->insert([
-            'subject_id' => $request->subjectId,
-            'number' => $request->number,
-            'caption' => $request->caption,
-            'caption_img' => $storedFile['captionImg'],
-            'choice1' => $request->choice1,
-            'choice2' => $request->choice2,
-            'choice3' => $request->choice3,
-            'choice4' => $request->choice4,
-            'choice5' => $request->choice5,
-            'choice_img1' => $storedFile['choiceImg1'],
-            'choice_img2' => $storedFile['choiceImg2'],
-            'choice_img3' => $storedFile['choiceImg3'],
-            'choice_img4' => $storedFile['choiceImg4'],
-            'choice_img5' => $storedFile['choiceImg5'],
-            'answer' => $request->answer,
-            'explan' => $request->explan,
-            'explan_img' => $storedFile['explanImg'],
-            'inappropriate_flg' => $request->inappropriateFlg,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        $columns['created_at'] = Carbon::now();
+        $columns['updated_at'] = Carbon::now();
+
+        DB::table('questions')->insert(
+            $columns
+        );
+    }
+
+    public function updateQuestion(array $columns)
+    {
+        $id = $columns['id'];
+        unset($columns['id']);
+        $columns['updated_at'] = Carbon::now();
+        foreach ($columns as $key => $value) {
+            $colum[$key] = $value;
+        }
+        DB::table('questions')
+            ->where('id', $id)
+            ->update(
+                $columns
+            );
+    }
+
+    public function getDeleteImgPath(int $id, string $targetImg)
+    {
+        $targetImgPath = DB::table('questions')
+            ->select($targetImg)
+            ->where('id', $id)
+            ->get();
+        return $targetImgPath;
     }
 }

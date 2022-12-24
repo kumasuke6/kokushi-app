@@ -31,7 +31,6 @@
                                         <li>
                                             <form action="{{ url('dashboard/questionList') }}" method="get">
                                                 <input type="hidden" name="id" value="{{ $subject->id }}">
-                                                <input type="hidden" name="number" value="{{ $subject->number }}">
                                                 <button type="submit"
                                                     class="dropdown-item">第{{ $subject->number }}回{{ $subject->name }}</button>
                                             </form>
@@ -164,7 +163,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="examName" class="form-label h5">試験選択</label>
-                                <select class="form-select" name="subjectId" id="inputGroupSelect01">
+                                <select class="form-select" name="subject_id" id="inputGroupSelect01">
                                     @foreach ($subjects as $subject)
                                         <option value="{{ $subject->id }}">
                                             第{{ $subject->number }}回{{ $subject->name }}
@@ -195,7 +194,7 @@
                                 <textarea name="caption" class="form-control" id="caption"></textarea>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="file" name="captionImg">
+                                <input class="form-control" type="file" name="caption_img">
                             </div>
                             <div class="mb-3">
                                 <div>
@@ -205,35 +204,35 @@
                                         <input name="choice1" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" name="choiceImg1">
+                                        <input class="form-control" type="file" name="choice_img1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice2">（2）</span>
                                         <input name="choice2" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" name="choiceImg2">
+                                        <input class="form-control" type="file" name="choice_img2">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice3">（3）</span>
                                         <input name="choice3" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" name="choiceImg3">
+                                        <input class="form-control" type="file" name="choice_img3">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice4">（4）</span>
                                         <input name="choice4" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" name="choiceImg4">
+                                        <input class="form-control" type="file" name="choice_img4">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="choice5">（5）</span>
                                         <input name="choice5" type="text" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" name="choiceImg5">
+                                        <input class="form-control" type="file" name="choice_img5">
                                     </div>
                                 </div>
                             </div>
@@ -242,14 +241,14 @@
                                 <textarea name="explan" class="form-control" id="explan"></textarea>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="file" name="explanImg">
+                                <input class="form-control" type="file" name="explan_img">
                             </div>
                             <div class="mb-3">
                                 <p class="form-label h5">不適切フラグ</p>
-                                <input class="form-check-input" type="radio" name="inappropriateFlg"
+                                <input class="form-check-input" type="radio" name="inappropriate_flg"
                                     id="inappropriateFlgOff" value="0" checked>
                                 <label for="inappropriateFlgOff">OFF</label>
-                                <input class="form-check-input" type="radio" name="inappropriateFlg"
+                                <input class="form-check-input" type="radio" name="inappropriate_flg"
                                     id="inappropriateFlgOn" value="1">
                                 <label for="inappropriateFlgOn">ON</label>
                             </div>

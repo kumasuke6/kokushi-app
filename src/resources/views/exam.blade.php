@@ -17,7 +17,7 @@
                     <h3>問題</h3>
                     <p>{{ $questions[0]->caption }}</p>
                     @if (!is_null($questions[0]->caption_img))
-                        <img class="exam-image" src={{ url('/storage/test_img', $questions[0]->caption_img) }}>
+                        <img class="exam-image" src={{ url($questions[0]->caption_img) }}>
                     @endif
                     <h4>選択肢</h4>
                     @foreach ($choices as $key => $choice)

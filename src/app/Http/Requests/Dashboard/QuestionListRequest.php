@@ -25,7 +25,6 @@ class QuestionListRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer'],
-            'number' => ['required', 'integer']
         ];
     }
 }

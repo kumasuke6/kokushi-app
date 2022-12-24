@@ -26,30 +26,30 @@ class CreateQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'subjectId' => ['required', 'integer'],
+            'subject_id' => ['required', 'integer'],
             'number' => ['required', 'integer'],
             'caption' => ['required', 'string', 'max:1000'],
-            'captionImg' => [File::image()],
-            'choice1' => ['required', 'string', 'max:255'],
-            'choice2' => ['required', 'string', 'max:255'],
+            'caption_img' => [File::image()],
+            'choice1' => ['nullable', 'string', 'max:255'],
+            'choice2' => ['nullable', 'string', 'max:255'],
             'choice3' => ['nullable', 'string', 'max:255'],
             'choice4' => ['nullable', 'string', 'max:255'],
             'choice5' => ['nullable', 'string', 'max:255'],
-            'choiceImg1' => [File::image()],
-            'choiceImg2' => [File::image()],
-            'choiceImg3' => [File::image()],
-            'choiceImg4' => [File::image()],
-            'choiceImg5' => [File::image()],
+            'choice_img1' => [File::image()],
+            'choice_img2' => [File::image()],
+            'choice_img3' => [File::image()],
+            'choice_img4' => [File::image()],
+            'choice_img5' => [File::image()],
             'answer' => ['required', 'integer'],
             'explan' => ['string', 'max:1000'],
-            'explanImg' => [File::image()],
-            'inappropriateFlg' => ['required', 'integer'],
+            'explan_img' => [File::image()],
+            'inappropriate_flg' => ['required', 'integer'],
         ];
     }
 
     public function withValidator($validator)
     {
-        $subject_id = $this->input('subjectId');
+        $subject_id = $this->input('subject_id');
         $number = $this->input('number');
 
         if (is_null($subject_id) || is_null($number)) {
@@ -68,25 +68,25 @@ class CreateQuestionRequest extends FormRequest
     public function attributes()
     {
         return [
-            'subjectId' => '試験選択',
+            'subject_id' => '試験選択',
             'number' => '問題番号',
             'answer' => '回答',
             'caption' => '問題説明',
-            'captionImg' => '問題説明画像',
+            'caption_img' => '問題説明画像',
             'choice1' => '選択肢(1)',
             'choice2' => '選択肢(2)',
             'choice3' => '選択肢(3)',
             'choice4' => '選択肢(4)',
             'choice5' => '選択肢(5)',
-            'choiceImg1' => '選択肢(1)画像',
-            'choiceImg2' => '選択肢(2)画像',
-            'choiceImg3' => '選択肢(3)画像',
-            'choiceImg4' => '選択肢(4)画像',
-            'choiceImg5' => '選択肢(5)画像',
+            'choice_img1' => '選択肢(1)画像',
+            'choice_img2' => '選択肢(2)画像',
+            'choice_img3' => '選択肢(3)画像',
+            'choice_img4' => '選択肢(4)画像',
+            'choice_img5' => '選択肢(5)画像',
             'answer' => '回答',
             'explan' => '解説',
-            'explanImg' => '解説画像',
-            'inappropriateFlg' => '不適切フラグ'
+            'explan_img' => '解説画像',
+            'inappropriate_flg' => '不適切フラグ'
         ];
     }
 }

@@ -22,9 +22,9 @@
                             <th>{{ $question->number }}</th>
                             <th>{{ $question->caption }}</th>
                             <th>
-                                <form action="{{ url('dashboard/question') }}" method="get">
+                                <form action="{{ url('dashboard/questionDetail') }}" method="get">
                                     <input type="hidden" name="id" value="{{ $question->id }}">
-                                    <button class="btn btn-primary">編集</button>
+                                    <button class="btn btn-primary" type="submit">編集</button>
                                 </form>
                             </th>
                         </tr>

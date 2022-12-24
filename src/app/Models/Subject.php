@@ -11,10 +11,14 @@ class Subject extends Model
 {
     public $timestamps = false;
 
-    public function getSubjects(?int $type = null)
+    public function getSubjects(?int $type = null, ?int $subject_id = null)
     {
+
         $query = DB::table('subjects')
             ->select('*');
+        if (!is_null($subject_id)) {
+            $query->where('id', $subject_id);
+        }
         if (!is_null($type)) {
             $query->where('type', $type);
         }

@@ -2,6 +2,11 @@ body {
     font-size: .875rem;
 }
 
+body img {
+    max-height: 100px;
+    max-width: 100px;
+}
+
 .feather {
     width: 16px;
     height: 16px;
