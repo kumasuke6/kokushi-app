@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->tinyInteger("type");
+            $table->string("name");
             $table->integer("year");
             $table->tinyInteger("harf_div");
+            $table->integer('number');
             $table->unique(['type', 'year', 'harf_div']);
+            $table->timestamps();
         });
     }
 

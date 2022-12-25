@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TopController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,22 +20,21 @@ Route::get('/welcome', function () {
     return view('/welcome');
 });
 
-Route::get('/', function () {
-    return view('top');
+Route::get('/', [TopController::class, 'showSubjects']);
+
+Route::prefix('questions')->group(function () {
+    Route::get('/exam', [ExamController::class, 'showQuestions']);
 });
 
-Route::prefix('questions')->group(function(){
-    Route::get('/select_test_type',function(){
-        return view('select_test_type');
-    });
-
-    Route::get('/test',function(){
-        return view('test');
-    });
+Route::prefix('/dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'showDashboard']);
+    Route::post('/createSubject', [DashboardController::class, 'createSubject']);
+    Route::post('/deleteSubject', [DashboardController::class, 'deleteSubject']);
+    Route::post('/createQuestion', [DashboardController::class, 'createQuestion']);
+    Route::post('/updateQuestion', [DashboardController::class, 'updateQuestion']);
+    Route::get('/questionList', [DashboardController::class, 'showDashboardQuestionList']);
+    Route::get('/questionDetail', [DashboardController::class, 'showDashboardQuestionDetail']);
+    Route::get('/users', [DashboardController::class, 'showDashboardUsers']);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
