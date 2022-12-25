@@ -71,7 +71,9 @@ class DashboardController extends Controller
 
     public function createQuestion(CreateQuestionRequest $request)
     {
-        $create_columns = $this->putFiles($request);
+        $create_columns = $request->all();
+        unset($create_columns['_token']);
+        $create_columns = $this->putFiles($request, $create_columns);
         $question = new Question();
         $question->createQuestion($create_columns);
         return redirect('/dashboard');
@@ -80,9 +82,9 @@ class DashboardController extends Controller
     public function updateQuestion(Request $request)
     {
         $question = new Question();
-        $update_columns = array();
-
-        $update_columns = $this->putFiles($request);
+        $update_columns = $request->all();
+        unset($update_columns['_token']);
+        $update_columns = $this->putFiles($request, $update_columns);
 
         foreach (array_keys($request->file()) as $key) {
             $deleteImgPath = $question->getDeleteImgPath($request->id, $key);
@@ -93,10 +95,8 @@ class DashboardController extends Controller
         return redirect('/dashboard/questionList?id=' . $request->subject_id);
     }
 
-    private function putFiles($request): array
+    private function putFiles($request, array $columns): array
     {
-        $columns = $request->all();
-        unset($columns['_token']);
         foreach (array_keys($request->file()) as $file_name) {
             $hash_file_name = $request->file($file_name)->hashName();
             $request->file($file_name)->storeAs('public/test_img', $hash_file_name);

@@ -79,9 +79,9 @@ class Question extends Model
         $id = $columns['id'];
         unset($columns['id']);
         $columns['updated_at'] = Carbon::now();
-        foreach ($columns as $key => $value) {
-            $colum[$key] = $value;
-        }
+        // foreach ($columns as $key => $value) {
+        //     $columns[$key] = $value;
+        // }
         DB::table('questions')
             ->where('id', $id)
             ->update(
