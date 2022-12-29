@@ -41,10 +41,24 @@
                         <tr>
                             <th>番号</th>
                             <th>説明文</th>
-                            <th>編集</th>
+                            <th>リトライ</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <th>1</th>
+                            <th>次の筋肉の気指定しについて誤っているものを選べ</th>
+                            <th>
+                                <button class="btn btn-primary" type="submit">問題を解く</button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>次の筋肉の気指定しについて誤っているものを選べ</th>
+                            <th>
+                                <button class="btn btn-primary" type="submit">問題を解く</button>
+                            </th>
+                        </tr>
                         <tr>
                             <th>1</th>
                             <th>次の筋肉の気指定しについて誤っているものを選べ</th>
