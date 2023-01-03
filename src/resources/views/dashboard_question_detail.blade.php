@@ -31,9 +31,9 @@
                             @endif
                             第{{ $subject->number }}回{{ $subject->name }}
                             @if ($subject->harf_div == '1')
-                                午前
+                                共通
                             @elseif ($subject->harf_div == '2')
-                                午後
+                                専門
                             @else
                                 なし
                             @endif
