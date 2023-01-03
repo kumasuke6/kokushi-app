@@ -10,7 +10,6 @@ class MyAccountController extends Controller
     public function myAccount()
     {
         $user = Auth::user();
-        // dd($user);
         return view('my_account', ['userName' => $user->name, 'userEmail' => $user->email, 'userType' => $user->type]);
     }
 }

@@ -25,7 +25,10 @@ Route::get('/', [TopController::class, 'showSubjects']);
 
 Route::prefix('questions')->group(function () {
     Route::get('/exam', [ExamController::class, 'showQuestions']);
+    Route::post('/changeReviewMark', [ExamController::class, 'changeReviewMark']);
 });
+
+
 
 Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'showDashboard']);
