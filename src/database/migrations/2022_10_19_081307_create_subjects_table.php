@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->id()->autoIncrement();
+            $table->id();
             $table->tinyInteger("type");
             $table->string("name");
             $table->integer("year");

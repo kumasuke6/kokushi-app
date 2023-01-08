@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id()->autoIncrement();
+            $table->id();
             $table->integer('subject_id');
             $table->integer('number');
             $table->text('caption');

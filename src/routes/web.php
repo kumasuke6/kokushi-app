@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MyAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,14 @@ Route::get('/', [TopController::class, 'showSubjects']);
 
 Route::prefix('questions')->group(function () {
     Route::get('/exam', [ExamController::class, 'showQuestions']);
+    Route::get('/examRetry', [ExamController::class, 'showQuestionForRetry'])->middleware('auth');
+    Route::get('/examRetryAll', [ExamController::class, 'showAllQuestionsForRetry'])->middleware('auth');
+    Route::post('/changeReviewMark', [ExamController::class, 'changeReviewMark']);
 });
 
-Route::prefix('/dashboard')->group(function () {
+
+
+Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'showDashboard']);
     Route::post('/createSubject', [DashboardController::class, 'createSubject']);
     Route::post('/deleteSubject', [DashboardController::class, 'deleteSubject']);
@@ -36,5 +42,7 @@ Route::prefix('/dashboard')->group(function () {
     Route::get('/questionDetail', [DashboardController::class, 'showDashboardQuestionDetail']);
     Route::get('/users', [DashboardController::class, 'showDashboardUsers']);
 });
+
+Route::get('/myAccount', [MyAccountController::class, 'myAccount'])->middleware(['auth'])->name('myAccount');
 
 require __DIR__ . '/auth.php';

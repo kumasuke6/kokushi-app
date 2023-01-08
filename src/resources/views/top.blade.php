@@ -56,14 +56,14 @@
                         <div class="d-flex flex-column justify-content-center">
                             <div class="mb-2 d-flex justify-content-center">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="harf-am" name="harf_divs[]"
-                                        value="1" onclick="return harfDivAllCheck('am')">
-                                    <label class="form-check-label" for="harf-am">午前問題すべて</label>
+                                    <input class="form-check-input" type="checkbox" id="harf-common" name="harf_divs[]"
+                                        value="1" onclick="return harfDivAllCheck('common')">
+                                    <label class="form-check-label" for="harf-common">共通問題すべて</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="harf-pm" name="harf_divs[]"
-                                        value="2" onclick="return harfDivAllCheck('pm')">
-                                    <label class="form-check-label" for="harf-pm">午後問題すべて</label>
+                                    <input class="form-check-input" type="checkbox" id="harf-specialty" name="harf_divs[]"
+                                        value="2" onclick="return harfDivAllCheck('specialty')">
+                                    <label class="form-check-label" for="harf-specialty">専門問題すべて</label>
                                 </div>
                             </div>
                             <div class="mb-2 d-flex justify-content-center">
@@ -101,9 +101,9 @@
                                 @foreach ($subjects as $subject)
                                     @if ($subject->harf_div === 1)
                                         <label class="my-1 me-1 px-1 border rounded">
-                                            <input class="form-check-input me-1 q-item q-item-am" type="checkbox"
+                                            <input class="form-check-input me-1 q-item q-item-common" type="checkbox"
                                                 name="subject_ids[]" value="{{ $subject->id }}">
-                                            第{{ $subject->number }}回（{{ $subject->year }}年）午前
+                                            第{{ $subject->number }}回（{{ $subject->year }}年）共通
                                         </label>
                                     @endif
                                 @endforeach
@@ -112,9 +112,9 @@
                                 @foreach ($subjects as $subject)
                                     @if ($subject->harf_div === 2)
                                         <label class="my-1 me-1 px-1 border rounded">
-                                            <input class="form-check-input me-1 q-item q-item-pm" type="checkbox"
+                                            <input class="form-check-input me-1 q-item q-item-specialty" type="checkbox"
                                                 name="subject_ids[]" value="{{ $subject->id }}">
-                                            第{{ $subject->number }}回（{{ $subject->year }}年）午後
+                                            第{{ $subject->number }}回（{{ $subject->year }}年）専門
                                         </label>
                                     @endif
                                 @endforeach
@@ -154,25 +154,25 @@
         }
 
         function harfDivAllCheck(harf_div) {
-            // 午前・午後全て選択の対応をする。
+            // 専門・共通全て選択の対応をする。
             console.log(harf_div);
-            var am = Array.prototype.slice.call(document.getElementsByClassName("q-item-am"));
-            var pm = Array.prototype.slice.call(document.getElementsByClassName("q-item-pm"));
+            var common = Array.prototype.slice.call(document.getElementsByClassName("q-item-common"));
+            var specialty = Array.prototype.slice.call(document.getElementsByClassName("q-item-specialty"));
             // var amAry = Array.prototype.slice.call(am);
-            if (harf_div === "am") {
-                for (let i = 0; i < am.length; i += 1) {
-                    if (am[i].checked === false) {
-                        am[i].checked = true;
+            if (harf_div === "common") {
+                for (let i = 0; i < common.length; i += 1) {
+                    if (common[i].checked === false) {
+                        common[i].checked = true;
                     } else {
-                        am[i].checked = false;
+                        common[i].checked = false;
                     }
                 }
-            } else if (harf_div == "pm") {
-                for (let i = 0; i < pm.length; i += 1) {
-                    if (pm[i].checked === false) {
-                        pm[i].checked = true;
+            } else if (harf_div == "specialty") {
+                for (let i = 0; i < specialty.length; i += 1) {
+                    if (specialty[i].checked === false) {
+                        specialty[i].checked = true;
                     } else {
-                        pm[i].checked = false;
+                        specialty[i].checked = false;
                     }
                 }
             }

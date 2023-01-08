@@ -9,26 +9,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav align-items-md-center">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">ホーム</a>
-                        </li>
-                        <li class="nav-item">
-                            @if (Route::has('login'))
-                                @auth
+                        @if (Route::has('login'))
+                            @auth
+                                <li class="nav-item">
                                     <form action="{{ route('logout') }}" method="post" class="mb-0">
                                         @csrf
                                         <input type="submit" value="ログアウト" class="nav-link bg-dark border-0">
                                     </form>
-                                @else
-                                    <div class="d-flex">
-                                        <a href="{{ route('login') }}" class="nav-link">ログイン</a>
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="nav-link">新規登録</a>
-                                        @endif
-                                    </div>
-                                @endauth
-                            @endif
-                        </li>
+                                </li>
+                                <li class="nav-item">
+                                    <form action="{{ route('myAccount') }}" method="get" class="mb-0">
+                                        @csrf
+                                        <input type="submit" value="マイページ" class="nav-link bg-dark border-0">
+                                    </form>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a href="{{ route('login') }}" class="nav-link">ログイン</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('register') }}" class="nav-link">新規登録</a>
+                                </li>
+                            @endauth
+                        @endif
                     </ul>
                 </div>
             </div>

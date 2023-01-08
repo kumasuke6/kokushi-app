@@ -57,7 +57,7 @@ class CreateSubjectRequest extends FormRequest
             'type' => '試験種別',
             'year' => '年度',
             'number' => '実施回',
-            'harf_div' => '午前・午後区分',
+            'harf_div' => '共通・専門区分',
         ];
     }
 }

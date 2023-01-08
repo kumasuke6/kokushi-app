@@ -89,20 +89,20 @@
                                         max="100">
                                 </div>
                             </div>
-                            <p class="h5">午前・午後区分</p>
+                            <p class="h5">共通・専門区分</p>
                             <div class="d-flex mb-3">
                                 <div class="form-group me-2">
-                                    <input class="form-check-input" type="radio" name="harf_div" id="am"
+                                    <input class="form-check-input" type="radio" name="harf_div" id="common"
                                         value="1" checked>
-                                    <label class="form-check-label" for="am">
-                                        午前
+                                    <label class="form-check-label" for="common">
+                                        共通
                                     </label>
                                 </div>
                                 <div class="form-group me-2">
-                                    <input class="form-check-input" type="radio" name="harf_div" id="pm"
+                                    <input class="form-check-input" type="radio" name="harf_div" id="specialty"
                                         value="2">
-                                    <label class="form-check-label" for="pm">
-                                        午後
+                                    <label class="form-check-label" for="specialty">
+                                        専門
                                     </label>
                                 </div>
                                 <div class="form-group me-2">
@@ -124,7 +124,7 @@
                                     <th>試験名</th>
                                     <th>試験年度</th>
                                     <th>試験実施回</th>
-                                    <th>午前・午後</th>
+                                    <th>共通・専門</th>
                                     <th>削除</th>
                                 </tr>
                             </thead>
@@ -136,9 +136,9 @@
                                         <th>{{ $subject->number }}回</th>
                                         <th>
                                             @if ($subject->harf_div == '1')
-                                                午前
+                                                共通
                                             @elseif ($subject->harf_div == '2')
-                                                午後
+                                                専門
                                             @else
                                                 なし
                                             @endif
@@ -168,9 +168,9 @@
                                         <option value="{{ $subject->id }}">
                                             第{{ $subject->number }}回{{ $subject->name }}
                                             @if ($subject->harf_div == '1')
-                                                午前
+                                                共通
                                             @elseif ($subject->harf_div == '2')
-                                                午後
+                                                専門
                                             @else
                                                 なし
                                             @endif

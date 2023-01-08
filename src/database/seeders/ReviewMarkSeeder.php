@@ -19,7 +19,7 @@ class ReviewMarkSeeder extends Seeder
         $params = [
             [
                 'user_id' => 1,
-                'question_id' => 0,
+                'question_id' => 1,
             ],
             [
                 'user_id' => 1,
@@ -28,11 +28,10 @@ class ReviewMarkSeeder extends Seeder
         ];
 
         $now = Carbon::now();
-        foreach ($params as $param){
+        foreach ($params as $param) {
             $param['created_at'] = $now;
             $param['updated_at'] = $now;
             DB::table('review_marks')->insert($param);
         }
-        //
     }
 }
