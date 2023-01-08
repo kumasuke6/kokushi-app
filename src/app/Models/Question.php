@@ -91,17 +91,16 @@ class Question extends Model
         return $question;
     }
 
-    // public function getAllQuestionsForRetry(array $question_ids)
-    // {
-    //     // dd($question_ids);
-    //     $query = DB::table('questions')
-    //         ->select('questions.id', 'questions.subject_id', 'questions.number as question_number', 'questions.caption', 'questions.caption_img', 'questions.choice1', 'questions.choice2', 'questions.choice3', 'questions.choice4', 'questions.choice5', 'questions.choice_img1', 'questions.choice_img2', 'questions.choice_img3', 'questions.choice_img4', 'questions.choice_img5', 'questions.answer', 'questions.explan', 'questions.explan_img', 'questions.inappropriate_flg', 'subjects.type', 'subjects.name', 'subjects.year', 'subjects.number as subject_number', 'subjects.harf_div')
-    //         ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
-    //         ->whereIn('questions.id', $question_ids);
-    //     // Examページの表示と合わせるためにpaginateで出力する
-    //     $question = $query->paginate(1);
-    //     return $question;
-    // }
+    public function getAllQuestionsForRetry(array $question_ids)
+    {
+        $query = DB::table('questions')
+            ->select('questions.id', 'questions.subject_id', 'questions.number as question_number', 'questions.caption', 'questions.caption_img', 'questions.choice1', 'questions.choice2', 'questions.choice3', 'questions.choice4', 'questions.choice5', 'questions.choice_img1', 'questions.choice_img2', 'questions.choice_img3', 'questions.choice_img4', 'questions.choice_img5', 'questions.answer', 'questions.explan', 'questions.explan_img', 'questions.inappropriate_flg', 'subjects.type', 'subjects.name', 'subjects.year', 'subjects.number as subject_number', 'subjects.harf_div')
+            ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
+            ->whereIn('questions.id', $question_ids);
+        // Examページの表示と合わせるためにpaginateで出力する
+        $question = $query->paginate(1);
+        return $question;
+    }
 
     public function createQuestion(array $columns)
     {

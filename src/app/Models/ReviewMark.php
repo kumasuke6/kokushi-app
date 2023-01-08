@@ -33,4 +33,12 @@ class ReviewMark extends Model
                 ->delete();
         }
     }
+
+    public function getQuestionIds(int $user_id)
+    {
+        return DB::table('review_marks')
+            ->select('question_id')
+            ->where('user_id', $user_id)
+            ->pluck('question_id')->all();
+    }
 }

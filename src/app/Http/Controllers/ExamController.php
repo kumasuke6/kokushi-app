@@ -34,43 +34,40 @@ class ExamController extends Controller
     public function showQuestionForRetry(Request $request)
     {
         $questionModel = new Question();
-        $reviewMarkModel = new ReviewMark();
 
         $questions = $questionModel->getQuestionForRetry($request->id);
-
-        // 見直しチェックの確認
-        $reviewMark = 0;
-        $user = Auth::user();
-        if (!is_null($user)) {
-            $reviewMark = $reviewMarkModel->check($user->id, $questions[0]->id);
-        }
 
         $resultChoices = $this->choiceRandom($questions, 1);
         $aryAnswer = $this->arrayAnswer($questions[0]->answer);
 
-        // examNumber(出題問題数)は1, seedは0を常時返却。
-        return view('exam', ['questions' => $questions, 'choices' => $resultChoices, 'aryAnswers' => $aryAnswer, 'seed' => 0, 'examNumber' => 1, 'reviewMark' => $reviewMark]);
+        // examNumber(出題問題数)は1, seedは0, reviewMarksは1を常時返却。
+        return view('exam', ['questions' => $questions, 'choices' => $resultChoices, 'aryAnswers' => $aryAnswer, 'seed' => 0, 'examNumber' => 1, 'reviewMark' => 1]);
     }
 
-    // public function showAllQuestionsForRetry()
-    // {
-    //     $user = Auth::user();
-    //     $reviewMarkModel = new ReviewMark();
-    //     $questionModel = new Question();
+    public function showAllQuestionsForRetry()
+    {
+        $user = Auth::user();
+        $reviewMarkModel = new ReviewMark();
+        $questionModel = new Question();
 
-    //     $questionIds = $reviewMarkModel->getQuestionIds($user->id);
-    //     $questions = $questionModel->getAllQuestionsForRetry($questionIds);
-    //     dd($questions);
-    // }
+        $questionIds = $reviewMarkModel->getQuestionIds($user->id);
+        $questions = $questionModel->getAllQuestionsForRetry($questionIds);
 
-    // public function changeReviewMark(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $reviewMarkModel = new ReviewMark();
-    //     if (!is_null($user)) {
-    //         $reviewMarkModel->insertOrDelete($user->id, $request->input('questionId'), $request->input('reviewMarkFlg'));
-    //     }
-    // }
+        $resultChoices = $this->choiceRandom($questions, 1);
+        $aryAnswer = $this->arrayAnswer($questions[0]->answer);
+
+        // examNumber(出題問題数)は1, seedは0, reviewMarksは1を常時返却。
+        return view('exam', ['questions' => $questions, 'choices' => $resultChoices, 'aryAnswers' => $aryAnswer, 'seed' => 0, 'examNumber' => 1, 'reviewMark' => 1]);
+    }
+
+    public function changeReviewMark(Request $request)
+    {
+        $user = Auth::user();
+        $reviewMarkModel = new ReviewMark();
+        if (!is_null($user)) {
+            $reviewMarkModel->insertOrDelete($user->id, $request->input('questionId'), $request->input('reviewMarkFlg'));
+        }
+    }
 
     // choiceをランダムにする処理(見直し問題は常にランダムにする)
     private function choiceRandom($questions, ?int $random_flg): array
