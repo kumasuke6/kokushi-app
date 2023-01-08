@@ -10,6 +10,8 @@ use Carbon\Carbon;
 class Question extends Model
 {
     use HasFactory;
+
+    // Examページにて使用
     public function getQuestions(?int $seed, array $subject_ids, ?int $qRandom)
     {
         if (is_null($seed)) {
@@ -30,6 +32,7 @@ class Question extends Model
         return [$questions, $seed];
     }
 
+    // Dashboardページにて使用
     public function getQuestion(int $id)
     {
         $question = DB::table('questions')
@@ -64,6 +67,42 @@ class Question extends Model
         return $count;
     }
 
+    // MyAccountページにて使用
+    public function getQuestionsListForMyAccount(int $user_id)
+    {
+        // subjectsもジョイン
+        $questions = DB::table('questions')
+            ->select('questions.id', 'questions.number as question_number', 'questions.caption', 'subjects.number as subject_number', 'subjects.harf_div')
+            ->join('review_marks', 'questions.id', '=', 'review_marks.question_id')
+            ->join('subjects', 'questions.subject_id', '=', 'subjects.id')
+            ->where('user_id', $user_id)
+            ->get();
+        return $questions;
+    }
+
+    public function getQuestionForRetry(int $id)
+    {
+        $query = DB::table('questions')
+            ->select('questions.id', 'questions.subject_id', 'questions.number as question_number', 'questions.caption', 'questions.caption_img', 'questions.choice1', 'questions.choice2', 'questions.choice3', 'questions.choice4', 'questions.choice5', 'questions.choice_img1', 'questions.choice_img2', 'questions.choice_img3', 'questions.choice_img4', 'questions.choice_img5', 'questions.answer', 'questions.explan', 'questions.explan_img', 'questions.inappropriate_flg', 'subjects.type', 'subjects.name', 'subjects.year', 'subjects.number as subject_number', 'subjects.harf_div')
+            ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
+            ->where('questions.id', $id);
+        // Examページの表示と合わせるためにpaginateで出力する
+        $question = $query->paginate(1);
+        return $question;
+    }
+
+    // public function getAllQuestionsForRetry(array $question_ids)
+    // {
+    //     // dd($question_ids);
+    //     $query = DB::table('questions')
+    //         ->select('questions.id', 'questions.subject_id', 'questions.number as question_number', 'questions.caption', 'questions.caption_img', 'questions.choice1', 'questions.choice2', 'questions.choice3', 'questions.choice4', 'questions.choice5', 'questions.choice_img1', 'questions.choice_img2', 'questions.choice_img3', 'questions.choice_img4', 'questions.choice_img5', 'questions.answer', 'questions.explan', 'questions.explan_img', 'questions.inappropriate_flg', 'subjects.type', 'subjects.name', 'subjects.year', 'subjects.number as subject_number', 'subjects.harf_div')
+    //         ->leftJoin('subjects', 'questions.subject_id', '=', 'subjects.id')
+    //         ->whereIn('questions.id', $question_ids);
+    //     // Examページの表示と合わせるためにpaginateで出力する
+    //     $question = $query->paginate(1);
+    //     return $question;
+    // }
+
     public function createQuestion(array $columns)
     {
         $columns['created_at'] = Carbon::now();
@@ -79,9 +118,7 @@ class Question extends Model
         $id = $columns['id'];
         unset($columns['id']);
         $columns['updated_at'] = Carbon::now();
-        // foreach ($columns as $key => $value) {
-        //     $columns[$key] = $value;
-        // }
+
         DB::table('questions')
             ->where('id', $id)
             ->update(

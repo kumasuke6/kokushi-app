@@ -23,51 +23,41 @@
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <p>ユーザー名 : {{ $userName }}</p>
-                <p>email : {{ $userEmail }}</p>
-                @if ($userType === 0)
+                <p>ユーザー名 : {{ $user->name }}</p>
+                <p>email : {{ $user->email }}</p>
+                @if ($user->type === 0)
                     <p>会員タイプ : 無料会員</p>
-                @elseif ($userType === 1)
+                @elseif ($user->type === 1)
                     <p>会員タイプ : 有料会員</p>
-                @elseif($userType === 2)
+                @elseif($user->type === 2)
                     <p>会員タイプ : Editor</p>
-                @elseif($userType === 3)
+                @elseif($user->type === 3)
                     <p>会員タイプ : Admin</p>
                 @endif
             </div>
             <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                <div class="mb-3">
+                    <a href="{{ url('questions/examRetryAll') }}" class="btn btn-primary">全ての問題をやり直す</a>
+                </div>
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>番号</th>
-                            <th>説明文</th>
-                            <th>リトライ</th>
-                        </tr>
-                    </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <th>次の筋肉の気指定しについて誤っているものを選べ</th>
-                            <th>
-                                <button class="btn btn-primary" type="submit">問題を解く</button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <th>次の筋肉の気指定しについて誤っているものを選べ</th>
-                            <th>
-                                <button class="btn btn-primary" type="submit">問題を解く</button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <th>次の筋肉の気指定しについて誤っているものを選べ</th>
-                            <th>
-                                <button class="btn btn-primary" type="submit">問題を解く</button>
-                            </th>
-                        </tr>
+                        @foreach ($questions as $question)
+                            <tr>
+                                <th class="text-center">第{{ $question->subject_number }}回
+                                    問{{ $question->question_number }}</th>
+                                <th>{{ $question->caption }}</th>
+                                <th class="text-center p-1">
+                                    <form action="{{ url('questions/examRetry') }}" method="get" class="mb-0">
+                                        <input type="hidden" name="id" class="form-check-input"
+                                            value="{{ $question->id }}">
+                                        <button type="submit" class="btn btn-primary p-1">リトライ</button>
+                                    </form>
+                                </th>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
     </main>

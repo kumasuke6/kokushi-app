@@ -25,6 +25,8 @@ Route::get('/', [TopController::class, 'showSubjects']);
 
 Route::prefix('questions')->group(function () {
     Route::get('/exam', [ExamController::class, 'showQuestions']);
+    Route::get('/examRetry', [ExamController::class, 'showQuestionForRetry'])->middleware('auth');
+    // Route::get('/examRetryAll', [ExamController::class, 'showAllQuestionsForRetry'])->middleware('auth');
     Route::post('/changeReviewMark', [ExamController::class, 'changeReviewMark']);
 });
 
