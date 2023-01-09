@@ -76,8 +76,13 @@
                     <div id="finish-page" class="col-lg-8 pt-3 d-none">
                         <div class="d-flex flex-column">
                             <p id="finish-comment">{{ $questions->currentpage() - 1 }}問終了しました。お疲れさまでした。</p>
-                            <a id="next-q-link" class="btn btn-primary" onclick="nxetQuestion()" role="button">次の問題へ</a>
-                            <a class="btn btn-outline-secondary" href="{{ url('/') }}">トップページへ</a>
+                            <a id="next-q-link" class="btn btn-primary mb-1" onclick="nxetQuestion()" role="button">次の問題へ</a>
+                            <a class="btn btn-outline-secondary mb-1" href="{{ url('/') }}">トップページへ</a>
+                            @if (Route::has('login'))
+                                @auth
+                                    <a class="btn btn-outline-secondary mb-1" href="{{ url('/myAccount') }}">見直し問題リストへ</a>
+                                @endauth
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-4 pt-3">
