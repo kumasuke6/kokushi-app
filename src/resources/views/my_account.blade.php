@@ -9,33 +9,20 @@
         <h1 class="my-3">マイページ</h1>
         <ul class="nav nav-pills mb-3 navbar-dark" id="pills-tab" role="tablist">
             <li class="nav-item me-2" role="presentation">
-                <button class="btn  active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                    基本情報
+                <button class="btn active" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review"
+                    type="button" role="tab" aria-controls="pills-review" aria-selected="true">
+                    見直しチェックリスト
                 </button>
             </li>
             <li class="nav-item me-2" role="presentation">
-                <button class="btn " id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review"
-                    type="button" role="tab" aria-controls="pills-review" aria-selected="false">
-                    見直しチェック問題
+                <button class="btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+                    role="tab" aria-controls="pills-home" aria-selected="false">
+                    登録情報
                 </button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <p>ユーザー名 : {{ $user->name }}</p>
-                <p>email : {{ $user->email }}</p>
-                @if ($user->type === 0)
-                    <p>会員タイプ : 無料会員</p>
-                @elseif ($user->type === 1)
-                    <p>会員タイプ : 有料会員</p>
-                @elseif($user->type === 2)
-                    <p>会員タイプ : Editor</p>
-                @elseif($user->type === 3)
-                    <p>会員タイプ : Admin</p>
-                @endif
-            </div>
-            <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+            <div class="tab-pane fade show active" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
                 <div class="mb-3">
                     <a href="{{ url('questions/examRetryAll') }}" class="btn btn-primary">全ての問題をやり直す</a>
                 </div>
@@ -57,7 +44,19 @@
                         @endforeach
                     </tbody>
                 </table>
-
+            </div>
+            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <p>ユーザー名 : {{ $user->name }}</p>
+                <p>email : {{ $user->email }}</p>
+                @if ($user->type === 0)
+                    <p>会員タイプ : 無料会員</p>
+                @elseif ($user->type === 1)
+                    <p>会員タイプ : 有料会員</p>
+                @elseif($user->type === 2)
+                    <p>会員タイプ : Editor</p>
+                @elseif($user->type === 3)
+                    <p>会員タイプ : Admin</p>
+                @endif
             </div>
         </div>
     </main>
