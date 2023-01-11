@@ -160,33 +160,35 @@
             }
 
             // 見直しチェックの処理
-            var debounceReviwMark = _.debounce(changeReviewMark, 1000);
-            var reviewMark = document.getElementById('review-mark');
-            reviewMark.addEventListener('click', debounceReviwMark);
+            if ({{ Js::from(Auth::check()) }}) {
+                var debounceReviwMark = _.debounce(changeReviewMark, 1000);
+                var reviewMark = document.getElementById('review-mark');
+                reviewMark.addEventListener('click', debounceReviwMark);
 
-            function changeReviewMark() {
-                console.log("見直しチェック");
-                const questionId = {{ Js::from($questions[0]->id) }};
-                if (reviewMark.checked) {
-                    var reviewMarkFlg = 1;
-                } else {
-                    var reviewMarkFlg = 0;
+                function changeReviewMark() {
+                    console.log("見直しチェック");
+                    const questionId = {{ Js::from($questions[0]->id) }};
+                    if (reviewMark.checked) {
+                        var reviewMarkFlg = 1;
+                    } else {
+                        var reviewMarkFlg = 0;
+                    }
+
+                    const postData = new FormData;
+                    postData.set('questionId', questionId);
+                    postData.set('reviewMarkFlg', reviewMarkFlg);
+
+                    fetch('changeReviewMark', {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            }, // CSRFトークン対策
+                            body: postData
+                        })
+                        .catch(error => {
+                            console.log(error); // エラー表示
+                        });
                 }
-
-                const postData = new FormData;
-                postData.set('questionId', questionId);
-                postData.set('reviewMarkFlg', reviewMarkFlg);
-
-                fetch('changeReviewMark', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        }, // CSRFトークン対策
-                        body: postData
-                    })
-                    .catch(error => {
-                        console.log(error); // エラー表示
-                    });
             }
         </script>
     @endsection
