@@ -21,13 +21,11 @@
                             @auth
                                 <div class="form-check">
                                     @if ($reviewMark === 0)
-                                        <input class="form-check-input" type="checkbox" id="reviewMark"
-                                            onclick="changeReviewMark()">
+                                        <input class="form-check-input" type="checkbox" id="review-mark">
                                     @else
-                                        <input class="form-check-input" type="checkbox" id="reviewMark"
-                                            onclick="changeReviewMark()" checked>
+                                        <input class="form-check-input" type="checkbox" id="review-mark" checked>
                                     @endif
-                                    <label class="form-check-label" for="reviewMark">
+                                    <label class="form-check-label" for="review-mark">
                                         見直しチェック
                                     </label>
                                 </div>
@@ -161,10 +159,15 @@
                 return true;
             }
 
+            // 見直しチェックの処理
+            var debounceReviwMark = _.debounce(changeReviewMark, 1000);
+            var reviewMark = document.getElementById('review-mark');
+            reviewMark.addEventListener('click', debounceReviwMark);
+
             function changeReviewMark() {
                 console.log("見直しチェック");
                 const questionId = {{ Js::from($questions[0]->id) }};
-                if (document.getElementById('reviewMark').checked) {
+                if (reviewMark.checked) {
                     var reviewMarkFlg = 1;
                 } else {
                     var reviewMarkFlg = 0;
