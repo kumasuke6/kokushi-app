@@ -21,13 +21,11 @@
                             @auth
                                 <div class="form-check">
                                     @if ($reviewMark === 0)
-                                        <input class="form-check-input" type="checkbox" id="reviewMark"
-                                            onclick="changeReviewMark()">
+                                        <input class="form-check-input" type="checkbox" id="review-mark">
                                     @else
-                                        <input class="form-check-input" type="checkbox" id="reviewMark"
-                                            onclick="changeReviewMark()" checked>
+                                        <input class="form-check-input" type="checkbox" id="review-mark" checked>
                                     @endif
-                                    <label class="form-check-label" for="reviewMark">
+                                    <label class="form-check-label" for="review-mark">
                                         見直しチェック
                                     </label>
                                 </div>
@@ -161,29 +159,36 @@
                 return true;
             }
 
-            function changeReviewMark() {
-                console.log("見直しチェック");
-                const questionId = {{ Js::from($questions[0]->id) }};
-                if (document.getElementById('reviewMark').checked) {
-                    var reviewMarkFlg = 1;
-                } else {
-                    var reviewMarkFlg = 0;
+            // 見直しチェックの処理
+            if ({{ Js::from(Auth::check()) }}) {
+                var debounceReviwMark = _.debounce(changeReviewMark, 1000);
+                var reviewMark = document.getElementById('review-mark');
+                reviewMark.addEventListener('click', debounceReviwMark);
+
+                function changeReviewMark() {
+                    console.log("見直しチェック");
+                    const questionId = {{ Js::from($questions[0]->id) }};
+                    if (reviewMark.checked) {
+                        var reviewMarkFlg = 1;
+                    } else {
+                        var reviewMarkFlg = 0;
+                    }
+
+                    const postData = new FormData;
+                    postData.set('questionId', questionId);
+                    postData.set('reviewMarkFlg', reviewMarkFlg);
+
+                    fetch('changeReviewMark', {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            }, // CSRFトークン対策
+                            body: postData
+                        })
+                        .catch(error => {
+                            console.log(error); // エラー表示
+                        });
                 }
-
-                const postData = new FormData;
-                postData.set('questionId', questionId);
-                postData.set('reviewMarkFlg', reviewMarkFlg);
-
-                fetch('changeReviewMark', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        }, // CSRFトークン対策
-                        body: postData
-                    })
-                    .catch(error => {
-                        console.log(error); // エラー表示
-                    });
             }
         </script>
     @endsection
